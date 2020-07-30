@@ -332,3 +332,4 @@ include_once 'layout/footer.php';
 }
 ?>
 <script src="../js/laboratorio.js"></script>
+<script src="../js/tipo.js"></script>

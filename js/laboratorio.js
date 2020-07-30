@@ -1,10 +1,18 @@
 $(document).ready(function(){
     buscar_laboratorio();
+    var funcion;
+    var editar=false;    
     $('#form-crear-laboratorio').submit(e=>{
         let nombre_laboratorio=$('#nombre-laboratorio').val();
-        funcion='crear';
+        let id_editado=$('#id_editar_lab').val();
+        //console.log(id_editado);
+        if(editar==false){
+            funcion='crear';
+        }else{
+            funcion='actualizar';
+        }
         //funcion ajax estilo post//
-        $.post('../controlador/controlador-laboratorio.php',{nombre_laboratorio,funcion},(response)=>{
+        $.post('../controlador/controlador-laboratorio.php',{nombre_laboratorio,id_editado,funcion},(response)=>{
             //console.log(response);
             if(response=='crear'){
                 $('#crear-laboratorio').hide('slow');
@@ -19,14 +27,14 @@ $(document).ready(function(){
                 $('#nocrear-laboratorio').hide(2000);
                 $('#form-crear-laboratorio').trigger('reset');
            }
-           // if(response=='editado'){
-             //   $('#crear-laboratorio-edit').hide('slow');
-              //  $('#crear-laboratorio-edit').show(1000);
-              //  $('#crear-laboratorio-edit').hide(2000);
-              //  $('#form-crear-laboratorio').trigger('reset');
-              //  buscar_laboratorio();
-          //  }
-          //  editar==false;
+           if(response=='editado'){
+                $('#crear-laboratorio-edit').hide('slow');
+                $('#crear-laboratorio-edit').show(1000);
+                $('#crear-laboratorio-edit').hide(2000);
+                $('#form-crear-laboratorio').trigger('reset');
+                buscar_laboratorio();
+            }
+        editar==false;
         })
         e.preventDefault();
    });
@@ -118,7 +126,7 @@ $(document).ready(function(){
         const id=$(elemento).attr('labId'); 
         const nombre=$(elemento).attr('labNom'); ; 
         const avatar=$(elemento).attr('labAvatar');
-        console.log(id + nombre + avatar);
+        //console.log(id + nombre + avatar);
         
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -141,7 +149,22 @@ $(document).ready(function(){
           }).then((result) => {
             if (result.value) {
                 $.post('../controlador/controlador-laboratorio.php',{id,funcion},(response)=>{
+                    editar==false;
                     console.log(response);
+                    if(response=='borrado'){
+                        swalWithBootstrapButtons.fire(
+                            'Eliminado!',
+                            'El laboratorio :'+nombre+' se ha eliminado',
+                            'success'
+                        )
+                        buscar_laboratorio();
+                    }else{
+                        swalWithBootstrapButtons.fire(
+                            'No se pudo Eliminar!',
+                            'El laboratorio :'+nombre+' nose ha eliminado porque esta asociado a un producto',
+                            'success'
+                          )
+                    }
                 })
               
             } else if(result.dismiss === Swal.DismissReason.cancel){
@@ -151,9 +174,15 @@ $(document).ready(function(){
                 'error'
               )
             }
-          })
-          
-          
-          
+          })        
+   })
+   $(document).on('click','.editar',(e)=>{
+        const elemento=$(this)[0].activeElement.parentElement.parentElement;
+        const id=$(elemento).attr('labId'); 
+        const nombre=$(elemento).attr('labNom'); ; 
+        const avatar=$(elemento).attr('labAvatar');
+        $('#id_editar_lab').val(id);
+        $('#nombre-laboratorio').val(nombre);
+        editar=true;
    })
 })
