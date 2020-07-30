@@ -181,7 +181,7 @@ session_start();
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="adm_catalogo.php">Home</a></li>
               <li class="breadcrumb-item active">Gestión atributo</li>
             </ol>
           </div>
@@ -270,7 +270,7 @@ session_start();
                                               <th>Acción</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="table-active" id="presentacion">
+                                        <tbody class="table-active" id="presentaciones">
 
                                         </tbody>
                                       </table>
@@ -333,3 +333,4 @@ include_once 'layout/footer.php';
 ?>
 <script src="../js/laboratorio.js"></script>
 <script src="../js/tipo.js"></script>
+<script src="../js/presentacion.js"></script>
