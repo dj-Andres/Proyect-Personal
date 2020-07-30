@@ -59,5 +59,12 @@
             $this->objetos=$query->rowcount();
             echo 'editado';
         }
+        function rellenar_presentacion(){
+            $sql="SELECT * FROM presentacion ORDER BY presentacion ASC";
+            $query=$this->acceso->prepare($sql);
+            $query->execute();
+            $this->objetos=$query->fetchall();          
+            return $this->objetos;
+        }      
     }
 ?>

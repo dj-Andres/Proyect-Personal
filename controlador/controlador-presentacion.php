@@ -28,4 +28,16 @@
         $id=$_POST['id'];            
         $presentacion->borrar($id);
     }
+    if($_POST['funcion']=='rellenar_presentaciones'){
+        $presentacion->rellenar_presentacion();
+        $json=array();
+        foreach($presentacion->objetos as $objeto){
+            $json[]=array(
+                'Id_presentacion'=>$objeto->id_presentacion,
+                'nombre'=>$objeto->presentacion
+            );
+        }
+        $jsonsting=json_encode($json);
+        echo $jsonsting;
+    }
 ?>

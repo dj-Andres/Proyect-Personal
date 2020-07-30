@@ -57,6 +57,13 @@
             $this->objetos=$query->rowcount();
             echo 'editado';
         }
+        function rellenar_tipo(){
+            $sql="SELECT * FROM tipo_producto ORDER BY nombre_tipo ASC";
+            $query=$this->acceso->prepare($sql);
+            $query->execute();
+            $this->objetos=$query->fetchall();          
+            return $this->objetos;
+        }      
               
     }
 ?>

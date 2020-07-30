@@ -29,4 +29,16 @@
         $id=$_POST['id'];            
         $tipo->borrar($id);
     }
+    if($_POST['funcion']=='rellenar_tipos'){
+        $tipo->rellenar_tipo();
+        $json=array();
+        foreach($tipo->objetos as $objeto){
+            $json[]=array(
+                'Id_tipo'=>$objeto->id_tipo_producto,
+                'nombre'=>$objeto->nombre_tipo
+            );
+        }
+        $jsonsting=json_encode($json);
+        echo $jsonsting;
+    }
 ?>

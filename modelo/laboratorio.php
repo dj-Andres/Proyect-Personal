@@ -69,6 +69,13 @@
             $query->execute(array(':Id'=>$id_editado,':nombre'=>$nombre));
             $this->objetos=$query->rowcount();
             echo 'editado';
+        }
+        function rellenar_laboratorio(){
+            $sql="SELECT * FROM laboratorio ORDER BY nombre ASC";
+            $query=$this->acceso->prepare($sql);
+            $query->execute();
+            $this->objetos=$query->fetchall();          
+            return $this->objetos;
         }      
   }
 ?>

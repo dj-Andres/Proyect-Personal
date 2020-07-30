@@ -1,4 +1,4 @@
-<!-- Tell the browser to be responsive to screen width -->
+  <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="../img/LogoSample_ByTailorBrands.ico" type="image/x-icon">
   <!-- Font Awesome -->
@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="../css/adminlte.min.css">
   <!---sweetaler2---->
   <link rel="stylesheet" href="../css/sweetalert2.css">
+  <!---selecet2---->
+  <link rel="stylesheet" href="../css/select2.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>

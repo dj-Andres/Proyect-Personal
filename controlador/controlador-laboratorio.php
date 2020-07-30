@@ -62,5 +62,17 @@
         $id_editado=$_POST['id_editado'];
         $laboratorio->editar($nombre,$id_editado);
     }
+    if($_POST['funcion']=='rellenar_laboratorios'){
+        $laboratorio->rellenar_laboratorio();
+        $json=array();
+        foreach($laboratorio->objetos as $objeto){
+            $json[]=array(
+                'Id_laboratorio'=>$objeto->id_laboratorio,
+                'nombre'=>$objeto->nombre
+            );
+        }
+        $jsonsting=json_encode($json);
+        echo $jsonsting;
+    }
     
 ?>
