@@ -12,29 +12,26 @@
         $tipo=$_POST['tipo'];
         $presentacion=$_POST['presentacion'];
         $avatar='producto.png';
-        $producto->crear($nombre,$concentracion,$adicional,$precio,$laboratorio,$tipo,$presentacion,$avatar);
+        $producto->crear($nombre,$concentracion,$adicional,$precio,$avatar,$laboratorio,$tipo,$presentacion);
     }
-    if($_POST['funcion']=='buscar'){
-        $producto->buscar();
+    if ($_POST['funcion']=='buscar') {
         $json=array();
-        foreach ($producto->objetos as $objeto) {
+        $producto->buscar();
+        foreach($producto->objetos as $objeto){
             $json[]=array(
                 'Id_producto'=>$objeto->id_producto,
                 'nombre'=>$objeto->nombre,
                 'concentracion'=>$objeto->concentracion,
                 'adicional'=>$objeto->adicional,
                 'precio'=>$objeto->precio,
-                //'stock'=>$total,
+                //'stock'=>'stock',
                 'laboratorio'=>$objeto->laboratorio,
                 'tipo'=>$objeto->tipo,
                 'presentacion'=>$objeto->presentacion,
-                'Id_laboratorio'=>$objeto->id_laboratorio,
-                'Id_tipo'=>$objeto->id_tipo_producto,
-                'Id_presentacion'=>$objeto->id_presentacion,
-                'avatar'=>'../img/producto/'.$objeto->avatar
+                'avatar'=>'../img/'.$objeto->avatar
             );
         }
-        $jsonsting=json_encode($json);
-        echo $jsonsting;
+            $jsonstring=json_encode($json);
+            echo $jsonstring;
     }
 ?>
