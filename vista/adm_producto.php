@@ -27,7 +27,7 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
                     <div class="alert alert-danger text-center" id="nocrear" style="display:none;">
                         <span><i class="fas fa-times m-1"></i>El producto ya existe</span>
                     </div>
-                    <div class="alert alert-danger text-center" id="editar" style="display:none;">
+                    <div class="alert alert-success text-center" id="editar" style="display:none;">
                         <span><i class="fas fa-check m-1"></i>Se actualizo correctamente</span>
                     </div>
                     <!--FIN-ALERTAS-->
@@ -147,9 +147,9 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
             <form id="form-logo" enctype="multipart/form-data">
                 <div class="input-group mb-3 ml-5 mt-2">
                     <input type="file"  class="input-group" name="foto">
-                    <input type="hidden" name="funcion" id="funcion">
-                    <input type="hidden" name="id_logo_prod" id="id_logo_prod">
-                    <input type="hidden" name="avatar" id="avatar">
+                    <input type="text" name="funcion" id="funcion">
+                    <input type="text" name="id_logo_prod" id="id_logo_prod">
+                    <input type="text" name="avatar" id="avatar">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>

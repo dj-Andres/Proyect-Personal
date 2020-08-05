@@ -11,14 +11,14 @@
         }
 
         function crear($nombre,$concentracion,$adicional,$precio,$avatar,$laboratorio,$tipo,$presentacion){
-            $sql='SELECT id_producto FROM productos WHERE nombre=:nombre AND concentracion=:concentracion AND adicional=:adicional AND prod_lab=:laboratorio AND prod_present=:presentacion AND prod_tip_prod=:tipo';
+            $sql="SELECT id_producto FROM productos WHERE nombre=:nombre AND concentracion=:concentracion AND adicional=:adicional AND prod_lab=:laboratorio AND prod_present=:presentacion AND prod_tip_prod=:tipo";
             $query=$this->acceso->prepare($sql);
             $query->execute(array(':nombre'=>$nombre,':concentracion'=>$concentracion,':adicional'=>$adicional,':laboratorio'=>$laboratorio,':presentacion'=>$presentacion,':tipo'=>$tipo));
             $this->objetos=$query->fetchall();
             if(!empty($this->objetos)){
                 echo 'nocrear';
             }else{
-                $sql='INSERT INTO productos(nombre,concentracion,adicional,precio,avatar,prod_lab,prod_present,prod_tip_prod) VALUES(:nombre,:concentracion,:adicional,:precio,:avatar,:laboratorio,:presentacion,:tipo)';
+                $sql="INSERT INTO productos(nombre,concentracion,adicional,precio,avatar,prod_lab,prod_tip_prod,prod_present) VALUES(:nombre,:concentracion,:adicional,:precio,:avatar,:laboratorio,:presentacion,:tipo)";
                 $query=$this->acceso->prepare($sql);
                 $query->execute(array(':nombre'=>$nombre,':concentracion'=>$concentracion,':adicional'=>$adicional,':precio'=>$precio,':avatar'=>$avatar,':laboratorio'=>$laboratorio,':presentacion'=>$presentacion,':tipo'=>$tipo));
                 echo 'crear';
@@ -39,6 +39,28 @@
                 $this->objetos=$query->fetchall();
                 return $this->objetos;
             }
+        }
+        function editar($id,$nombre,$concentracion,$adicional,$precio,$laboratorio,$tipo,$presentacion){
+            $sql="SELECT id_producto FROM productos WHERE id_producto!=:id AND nombre=:nombre AND concentracion=:concentracion AND adicional=:adicional AND  prod_lab=:laboratorio AND prod_present=:presentacion AND prod_tip_prod=:tipo";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array('id'=>$id,':nombre'=>$nombre,':concentracion'=>$concentracion,':adicional'=>$adicional,':laboratorio'=>$laboratorio,':presentacion'=>$presentacion,':tipo'=>$tipo));
+            $this->objetos=$query->fetchall();
+
+            if(!empty($this->objetos)){
+                echo 'noeditado';
+            }else{
+                $sql="UPDATE productos SET nombre=:nombre,concentracion=:concentracion,adicional=:adicional,precio=:precio,prod_lab=:laboratorio,prod_tip_prod=:tipo,prod_present=:presentacion WHERE id_producto=:id";
+                $query=$this->acceso->prepare($sql);
+                $query->execute(array('id'=>$id,':nombre'=>$nombre,':concentracion'=>$concentracion,':adicional'=>$adicional,':laboratorio'=>$laboratorio,':presentacion'=>$presentacion,':tipo'=>$tipo,':precio'=>$precio));
+                $this->objetos=$query->rowcount();
+                echo 'editado';
+            }
+        }
+        function cambiar_logo($id,$nombre_foto){
+            $sql="UPDATE productos SET avatar=:avatar WHERE id_producto=:Id";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array(':Id'=>$id,':avatar'=>$nombre_foto));
+                
         }
     }
 
