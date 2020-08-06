@@ -100,6 +100,15 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-header">Compras</li>
+              <li class="nav-item">
+                <a href="adm_proveedor.php" class="nav-link">
+                  <i class="nav-icon fas fa-truck"></i>
+                  <p>
+                    Gestión de Proveedores
+                  </p>
+                </a>
+              </li>
         </ul>
       </nav>
     <!-- /.sidebar -->

@@ -62,6 +62,18 @@
             $query->execute(array(':Id'=>$id,':avatar'=>$nombre_foto));
                 
         }
+        function borrar($id){
+            $sql="DELETE FROM productos WHERE id_producto=:Id";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array(':Id'=>$id));
+            $this->objetos=$query->rowcount();
+           
+            if(!empty($this->objetos)){
+                echo 'borrado';
+            }else{
+                echo 'no-borrado';
+            }
+       }
     }
 
 ?>

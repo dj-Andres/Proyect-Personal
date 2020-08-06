@@ -61,7 +61,7 @@
             move_uploaded_file($_FILES['foto']['tmp_name'],$ruta);
             $producto->cambiar_logo($id,$nombre_foto);
             foreach($producto->objetos as $objeto){
-                if($avatar!='producto.png'){
+                if($avatar!='../img/producto.png'){
                     unlink('../img/producto/'.$objeto->avatar);
                 }
             }
@@ -81,5 +81,9 @@
             echo $jsonstring;
           }
         //echo $id;
+    }
+    if($_POST['funcion']=='borrar'){
+        $id=$_POST['id'];            
+        $producto->borrar($id);
     }
 ?>

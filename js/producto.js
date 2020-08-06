@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    alert('hola mundo');
     var funcion;
     var editar=false;
     buscar_producto();
@@ -218,11 +217,12 @@ $(document).ready(function(){
         editar=true;
     })
     $(document).on('click','.borrar',(e)=>{
-        funcion='borrar';
+        funcion="borrar";
         const elemento=$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
         const id=$(elemento).attr('prodID');
         const nombre=$(elemento).attr('prodNom');
         const avatar=$(elemento).attr('prodAvatar');
+        
         
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -233,45 +233,43 @@ $(document).ready(function(){
           })
           
           swalWithBootstrapButtons.fire({
-            title: 'Desea eliminar al laboratorio: '+nombre+'?',
-            text: "No se podra revertir la acción!",
-            //icon: 'warning',
-            // añadimos propiedades para mostrar el avatar del laboratorio//
+            title: 'Desea eliminar el producto? '+nombre+'',
+            text: "No se va a poder revertir!",
             imageUrl:''+avatar+'',
             imageWidth:100,
             imageHeigth:100,
             showCancelButton: true,
-            confirmButtonText: 'Si, se elimino el registro!',
+            confirmButtonText: 'Si, eliminare!',
             cancelButtonText: 'No, cancelar!',
             reverseButtons: true
           }).then((result) => {
             if (result.value) {
-                //eviamos datos mediante ajax//
                 $.post('../controlador/controlador-producto.php',{id,funcion},(response)=>{
-                    //console.log(response);
                     editar==false;
-                    if (response=='borrado') {
-                            swalWithBootstrapButtons.fire(
-                                'Eliminado!',
-                                'El producto :'+nombre+' se ha eliminado',
-                                'success'
-                            )
-                            buscar_producto();
+                    if(response=='borrado'){
+                        swalWithBootstrapButtons.fire(
+                            'Eliminado!',
+                            'El producto :'+nombre+' se ha eliminado',
+                            'success'
+                        )
+                        buscar_producto();
                     }else{
                         swalWithBootstrapButtons.fire(
                             'No se pudo Eliminar!',
-                            'El producto :'+nombre+' nose ha eliminado porque esta asociado a un producto',
+                            'El producto :'+nombre+' nose ha eliminado porque esta asociado a un lote',
                             'success'
                           )
                     }
                 })
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                swalWithBootstrapButtons.fire(
-                'Cancelar',
-                'El producto :'+nombre+' no se elimino',
+              
+            } else if(result.dismiss === Swal.DismissReason.cancel){
+              swalWithBootstrapButtons.fire(
+                'No se pudo eliminar',
+                'El producto '+nombre+' no fue eliminado',
                 'error'
               )
             }
-          })
-    })
+          })        
+   })
+    
 })
