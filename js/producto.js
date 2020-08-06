@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    alert('hola mundo');
     var funcion;
     var editar=false;
     buscar_producto();
@@ -177,7 +178,7 @@ $(document).ready(function(){
             processData:false,
             comentType:false
         }).done(function(response){
-            console.log(response);
+            //console.log(response);
             const json=JSON.parse(response);
             if (json.alert=='editado') {
                 $('#logo-actual').attr('src',json.ruta);
@@ -215,5 +216,62 @@ $(document).ready(function(){
         $('#tipo_producto').val(tipo).trigger('change');
         $('#presentacion').val(presentacion).trigger('change');
         editar=true;
+    })
+    $(document).on('click','.borrar',(e)=>{
+        funcion='borrar';
+        const elemento=$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
+        const id=$(elemento).attr('prodID');
+        const nombre=$(elemento).attr('prodNom');
+        const avatar=$(elemento).attr('prodAvatar');
+        
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger mr-1'
+            },
+            buttonsStyling: false
+          })
+          
+          swalWithBootstrapButtons.fire({
+            title: 'Desea eliminar al laboratorio: '+nombre+'?',
+            text: "No se podra revertir la acción!",
+            //icon: 'warning',
+            // añadimos propiedades para mostrar el avatar del laboratorio//
+            imageUrl:''+avatar+'',
+            imageWidth:100,
+            imageHeigth:100,
+            showCancelButton: true,
+            confirmButtonText: 'Si, se elimino el registro!',
+            cancelButtonText: 'No, cancelar!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.value) {
+                //eviamos datos mediante ajax//
+                $.post('../controlador/controlador-producto.php',{id,funcion},(response)=>{
+                    //console.log(response);
+                    editar==false;
+                    if (response=='borrado') {
+                            swalWithBootstrapButtons.fire(
+                                'Eliminado!',
+                                'El producto :'+nombre+' se ha eliminado',
+                                'success'
+                            )
+                            buscar_producto();
+                    }else{
+                        swalWithBootstrapButtons.fire(
+                            'No se pudo Eliminar!',
+                            'El producto :'+nombre+' nose ha eliminado porque esta asociado a un producto',
+                            'success'
+                          )
+                    }
+                })
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                'Cancelar',
+                'El producto :'+nombre+' no se elimino',
+                'error'
+              )
+            }
+          })
     })
 })

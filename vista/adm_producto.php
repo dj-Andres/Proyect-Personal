@@ -147,9 +147,9 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
             <form id="form-logo" enctype="multipart/form-data">
                 <div class="input-group mb-3 ml-5 mt-2">
                     <input type="file"  class="input-group" name="foto">
-                    <input type="text" name="funcion" id="funcion">
-                    <input type="text" name="id_logo_prod" id="id_logo_prod">
-                    <input type="text" name="avatar" id="avatar">
+                    <input type="hidden" name="funcion" id="funcion">
+                    <input type="hidden" name="id_logo_prod" id="id_logo_prod">
+                    <input type="hidden" name="avatar" id="avatar">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
