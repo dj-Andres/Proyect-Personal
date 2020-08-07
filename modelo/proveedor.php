@@ -19,9 +19,10 @@
             if(!empty($this->objetos)){
                 echo 'no-crear';
             }else{
-                $sql="INSERT INTO proveedor(nombre,telefono,correo,direccion,avatar)VALUES(:nombre,:telefono,:correo,:direccion,:avatar)";
-                $query=$this->acceso->prepare($sql);
-                $query->execute(array(':nombre'=>$nombre,':telefono'=>$telefono,':correo'=>$correo,':direccion'=>$correo,':direccion'=>$direccion,':avatar'=>$avatar));
+                $sql2="INSERT INTO proveedor(nombre,telefono,correo,direccion,avatar)VALUES(:nombre,:telefono,:correo,:direccion,:avatar)";
+                $query2=$this->acceso->prepare($sql2);
+                $query2->execute(array(':nombre'=>$nombre,':telefono'=>$telefono,':correo'=>$correo,':direccion'=>$correo,':direccion'=>$direccion,':avatar'=>$avatar));
+                $this->objetos=$query->fetchall();
                 echo 'crear';
             }
         }
@@ -39,6 +40,22 @@
                 $query->execute();
                 $this->objetos=$query->fetchall();
                 return $this->objetos;
+            }
+        }
+        function editar($id,$nombre,$telefono,$correo,$direccion){
+            $sql="SELECT id_proveedor FROM proveedor WHERE id_proveedor=:id";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array('id'=>$id));
+            $this->objetos=$query->fetchall();
+
+            if(!empty($this->objetos)){
+                echo 'no-editado';
+            }else{
+                $sql="UPDATE proveedor SET nombre=:nombre,telefono=:telefono,correo=:correo,:direccion=:direccion WHERE id_producto=:id";
+                $query=$this->acceso->prepare($sql);
+                $query->execute(array('id'=>$id,':nombre'=>$nombre,':telefono'=>$telefono,':correo'=>$correo,':direccion'=>$direccion));
+                $this->objetos=$query->rowcount();
+                echo 'editado';
             }
         }
     }
