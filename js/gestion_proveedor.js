@@ -116,4 +116,18 @@ $(document).ready(function(){
         
         editar=true;
     });
+    $(document).on('click','.avatar',(e)=>{
+        funcion='cambiar_avatar';
+        const elemento=$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
+        const id=$(elemento).attr('ProvID');
+        const nombre=$(elemento).attr('ProvNom');
+        const avatar=$(elemento).attr('provAvatar');
+
+        $('#funcion').val(funcion);
+        $('#id_logo_prov').val(id);
+        $('#avatar').val(avatar);
+        $('#logo-actual').attr('src',avatar);
+        $('#nombre_logo').html(nombre);
+
+    });
 })
