@@ -58,6 +58,11 @@
                 echo 'editado';
             }
         }
+        function cambiar_logo($id,$nombre_foto){
+            $sql="UPDATE proveedor SET avatar=:avatar WHERE id_proveedor=:id";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array(':id'=>$id,':avatar'=>$nombre_foto));
+        }
     }
 
 ?>

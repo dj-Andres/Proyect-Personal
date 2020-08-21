@@ -14,7 +14,7 @@ $(document).ready(function(){
             funcion='crear';
         }
         $.post('../controlador/controlador-proveedor.php',{id_editado,nombre,telefono,correo,direccion,funcion},(response)=>{
-            console.log(response);
+            //console.log(response);
             if(response=='crear'){
                 $('#crear').hide('slow');
                 $('#crear').show(1000);
@@ -123,11 +123,24 @@ $(document).ready(function(){
         const nombre=$(elemento).attr('ProvNom');
         const avatar=$(elemento).attr('provAvatar');
 
-        $('#funcion').val(funcion);
-        $('#id_logo_prov').val(id);
-        $('#avatar').val(avatar);
         $('#logo-actual').attr('src',avatar);
         $('#nombre_logo').html(nombre);
-
+        $('#id_logo_prov').val(id);
+        $('#funcion').val(funcion);
+        $('#avatar').val(avatar);
+    });
+    $('form-logo').submit(e=>{
+        let formData=new FormData($('#form-logo')[0]);
+        $.ajax({
+            url:'../controlador/controlador-proveedor.php',
+            type:'POST',
+            data:formData,
+            cache:false,
+            processData:false,
+            comentType:false
+        }).done(function(response){
+            console.log(response);
+        })
+        e.preventDefault();
     });
 })
