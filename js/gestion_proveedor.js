@@ -143,4 +143,63 @@ $(document).ready(function(){
         })
         e.preventDefault();
     });
+    $(document).on('click','.borrar',(e)=>{
+        funcion="borrar";
+        const elemento=$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
+        const id=$(elemento).attr('ProvID');
+        const nombre=$(elemento).attr('ProvNom');
+        const avatar=$(elemento).attr('provAvatar');
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger mr-1'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Desea eliminar el proveedor: '+nombre+'?',
+            text: "No se podra revertir la acción!",
+            //icon: 'warning',
+            // añadimos propiedades para mostrar el avatar del laboratorio//
+            imageUrl:''+avatar+'',
+            imageWidth:100,
+            imageHeigth:100,
+            showCancelButton: true,
+            confirmButtonText: 'Si, se elimino el registro!',
+            cancelButtonText: 'No, cancelar!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.value) {
+                //eviamos datos mediante ajax//
+                $.post('../controlador/controlador-proveedor.php',{id,funcion},(response)=>{
+                    //console.log(response);
+                    editar==false;
+                    if (response=='borrado') {
+                            swalWithBootstrapButtons.fire(
+                                'Eliminado!',
+                                'El proveeedor :'+nombre+' se ha eliminado',
+                                'success'
+                            )
+                            buscar_proveedor();
+                    }else{
+                        swalWithBootstrapButtons.fire(
+                            'No se pudo Eliminar!',
+                            'El proveedor :'+nombre+' nose ha eliminado porque esta asociado a un producto',
+                            'success'
+                          )
+                    }
+                })
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                'Cancelar',
+                'El proveedor :'+nombre+' no se elimino',
+                'error'
+              )
+            }
+        })
+
+    })
+
 })

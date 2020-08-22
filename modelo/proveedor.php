@@ -63,6 +63,7 @@
             $query=$this->acceso->prepare($sql);
             $query->execute(array(':id'=>$id,':avatar'=>$nombre_foto));
         }
+        
     }
 
 ?>

@@ -67,4 +67,8 @@
             echo $jsonstring;
           }
     }
+    //if($_POST['funcion']=='borrar'){
+    //    $id=$_POST['id'];
+     //   $proveedor->eliminar($id);
+    //}
 ?>
