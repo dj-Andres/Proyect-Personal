@@ -22,6 +22,36 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="adm_catalogo.php" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+      <li class="nav-item dropdown" id="cat-carrito" style="display: none;">
+        <img  src="../img/carrito.png" class="imagen-carrito nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span id="contador" class="contador badge badge-danger"></span>
+        </img>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <table class="carro table table-hover text-nowrap p-0">
+            <thead class="table-success">
+              <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Concentración</th>
+                <th>Adicional</th>
+                <th>Precio</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody id="lista">
+
+            </tbody>
+          </table>
+          <a href="#" class="btn btn-danger btn-block" id="procesar_pedido">Procesar Compra</a>
+          <a href="#" class="btn btn-primary btn-block" id="vaciar-carrito">Vaciar Carrito</a>
+        </div>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <a href="../controlador/cerrar_session.php" class="nav-link">Cerrar Sessión</a>
@@ -35,7 +65,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="../adm_catalogo.php" class="brand-link">
       <img src="../img/LogoSample_ByTailorBrands.jpg" alt="Dj-Andres" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">Proyect</span>
