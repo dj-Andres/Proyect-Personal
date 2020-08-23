@@ -63,6 +63,13 @@
             $query=$this->acceso->prepare($sql);
             $query->execute(array(':id'=>$id,':avatar'=>$nombre_foto));
         }
+        function rellenar_proveedor(){
+            $sql="SELECT * FROM proveedor ORDER BY nombre ASC";
+            $query=$this->acceso->prepare($sql);
+            $query->execute();
+            $this->objetos=$query->fetchall();          
+            return $this->objetos;
+        }  
         
     }
 

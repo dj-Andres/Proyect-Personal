@@ -74,6 +74,13 @@
                 echo 'no-borrado';
             }
        }
+       function obtener_stock($id){
+            $sql="SELECT SUM(stock) as total FROM lote WHERE lote_Id_prod=:id";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array(':id'=>$id));
+            $this->objetos=$query->fetchall();
+            return $this->objetos;
+       }
     }
 
 ?>

@@ -18,13 +18,17 @@
         $json=array();
         $producto->buscar();
         foreach($producto->objetos as $objeto){
+            $producto->obtener_stock($objeto->id_producto);
+            foreach ($producto->objetos as $key) {
+                $total=$key->total;
+            }
             $json[]=array(
                 'Id_producto'=>$objeto->id_producto,
                 'nombre'=>$objeto->nombre,
                 'concentracion'=>$objeto->concentracion,
                 'adicional'=>$objeto->adicional,
                 'precio'=>$objeto->precio,
-                'stock'=>'stock',
+                'stock'=>$total,
                 'laboratorio'=>$objeto->laboratorio,
                 'Id_laboratorio'=>$objeto->id_laboratorio,
                 'tipo'=>$objeto->tipo,

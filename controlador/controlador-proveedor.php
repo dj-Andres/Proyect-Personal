@@ -71,4 +71,16 @@
     //    $id=$_POST['id'];
      //   $proveedor->eliminar($id);
     //}
+    if($_POST['funcion']=='rellenar_proveedor'){
+        $proveedor->rellenar_proveedor();
+        $json=array();
+        foreach($proveedor->objetos as $objeto){
+            $json[]=array(
+                'Id_proveedor'=>$objeto->id_proveedor,
+                'nombre'=>$objeto->nombre
+            );
+        }
+        $jsonsting=json_encode($json);
+        echo $jsonsting;
+    }
 ?>

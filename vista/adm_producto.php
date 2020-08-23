@@ -91,7 +91,7 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
                     <form id="form-crear-lote">
                         <div class="form-group">
                             <label for="producto">Producto:</label>
-                            <label id="producto">Nombre:</label>
+                            <label id="producto-name">Nombre:</label>
                         </div>
                         <div class="form-group">
                             <label for="proveedor">Proveedor:</label>
@@ -99,13 +99,13 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
                         </div>
                         <div class="form-group">
                             <label for="stock">Stock:</label>
-                            <input type="number" id="stock" class="form-control" placeholder="Ingrese el stock">
+                            <input type="number" id="stock" class="form-control" placeholder="Ingrese el stock" value=1>
                         </div>
                         <div class="form-group">
                             <label for="stock">Fecha Vencimiento:</label>
                             <input type="date" id="vencimiento" class="form-control" placeholder="Ingrese la fecha de vencimiento">
                         </div>
-                        <input type="hidden" id="id_editar_lote">
+                        <input type="hidden" id="id_lote_prod">
                 </div>
                 <div class="card-footer">
                     <button class="btn bg-gradient-primary float-rigth m-1" type="submit">Guardar</button>

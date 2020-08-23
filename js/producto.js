@@ -7,6 +7,7 @@ $(document).ready(function(){
     rellenar_laboratorios();
     rellenar_tipos();
     rellenar_presentaciones();
+    rellenar_proveedor();
     function rellenar_laboratorios(){
         funcion='rellenar_laboratorios';
         $.post('../controlador/controlador-laboratorio.php',{funcion},(response)=>{
@@ -18,6 +19,19 @@ $(document).ready(function(){
                 `;
             });
             $('#laboratorio').html(template);
+        })
+    }
+    function rellenar_proveedor(){
+        funcion='rellenar_proveedor';
+        $.post('../controlador/controlador-proveedor.php',{funcion},(response)=>{
+            const proveedores=JSON.parse(response);
+            let template='';
+            proveedores.forEach(proveedor => {
+                template+=`
+                    <option value="${proveedor.Id_proveedor}">${proveedor.nombre}</option>
+                `;
+            });
+            $('#proveedor').html(template);
         })
     }
     function rellenar_tipos(){
@@ -167,6 +181,33 @@ $(document).ready(function(){
         $('#nombre_logo').html(nombre);
 
     })
+    $(document).on('click','.lote',(e)=>{
+        const elemento=$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
+        const id=$(elemento).attr('prodID');
+        const nombre=$(elemento).attr('prodNom');
+        $('#id_lote_prod').val(id);
+        $('#producto-name').html(nombre);
+
+    })
+    $('#form-crear-lote').submit(e=>{
+        let id_producto=$('#id_lote_prod').val();
+        let proveedor=$('#proveedor').val();
+        let stock=$('#stock').val();
+        let vencimiento=$('#vencimiento').val();
+        funcion='crear_stock';
+        
+        $.post('../controlador/controlador-lote.php',{funcion,id_producto,proveedor,stock,vencimiento},(response)=>{
+            if(response=='crear'){
+                $('#add').hide('slow');
+                $('#add').show(1000);
+                $('#add').hide(2000);
+                $('#form-crear-lote').trigger('reset');
+                buscar_producto();
+            }
+        })
+        
+        e.preventDefault();
+    });
     $('#form-logo').submit(e=>{
         let formData=new FormData($('#form-logo')[0]);
         $.ajax({
