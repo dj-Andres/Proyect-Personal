@@ -30,6 +30,25 @@
                 return $this->objetos;
             }
         }
+        function editar($id_lote,$stock){
+            $sql="UPDATE lote SET stock=:stock WHERE id_lote=:id";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array(':stock'=>$stock,':id'=>$id_lote));
+            //$this->objetos=$query->rowcount();
+            echo 'editado';
+
+        }
+        function borrar($id_lote){
+            $sql="DELETE FROM lote  WHERE id_lote=:Id_lote";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array(':Id_lote'=>$id_lote));
+            $this->objetos=$query->rowcount();
+            if(!empty($this->objetos)){
+                echo 'borrado';
+            }else{
+                echo 'noborrado';
+            }
+        }
     }
 
 ?>

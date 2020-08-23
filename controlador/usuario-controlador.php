@@ -7,18 +7,19 @@
     $Id_usuario=$_SESSION['cedula'];
     if ($_POST['funcion']=='buscar_usuario') {
         $json=array();
-        //$fecha_actual=new DateTime();
+        date_default_timezone_set('America/Guayaquil');
+        $fecha_actual=new DateTime();
         $usuario->obtener_datos($_POST['dato']);
         foreach($usuario->objetos as $objeto){
-            //$naciiento=new DateTime($objeto->edad);
+            $naciiento=new DateTime($objeto->edad);
             //comparacion de la fecha actual con la fecha de nacimiento//
-            //$edad=$naciiento->diff($fecha_actual);
-            //$edad_año=$edad->y;
+            $edad=$naciiento->diff($fecha_actual);
+            $edad_año=$edad->y;
             $json[]=array(
                 //el ultimo nombre es la columna de la tabla usuario//
                     'nombre'=>$objeto->nombre,
                     'apellido'=>$objeto->apellido,
-                    'edad'=>$objeto->edad,
+                    'edad'=>$edad_año,
                     'cedula'=>$objeto->cedula,
                     'tipo_usuario'=>$objeto->nombre_tipo,
                     'telefono'=>$objeto->telefono,
