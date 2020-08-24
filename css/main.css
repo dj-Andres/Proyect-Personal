@@ -1,0 +1,73 @@
+.carro *{
+    position: relative;
+}
+@media screen and (max-width:900px){
+    .carro{
+        display: block;
+        width: 260px !important;
+        height: auto;
+    }
+    .carro thead{
+        display: none;
+    }
+    .carro >*, .carro tr, .carro td{
+        display: block;
+    }
+    .carro tbody tr td{
+        padding-left: 35% !important;
+        margin-bottom: -15px;
+    }
+    .carro tbody tr td:last-child{
+        margin-bottom: 0;
+    }
+    .carro tbody tr td:before{
+        color:#999;
+        font-weight: unset;
+        position: absolute;
+        left:10px;
+        top: 10px;
+    }
+    .carro tbody tr{
+        font-size: 14px;
+    }
+    .carro tbody tr td:nth-child(1):before{
+        content: "Codigo:";
+        font-weight: bold;
+        color: #000;
+    }
+    .carro tbody tr td:nth-child(2):before{
+        content: "Nombre:";
+        font-weight: bold;
+        color: #000;
+    }
+    .carro tbody tr td:nth-child(3):before{
+        content: "Concen:";
+        font-weight: bold;
+        color: #000;
+    }
+    .carro tbody tr td:nth-child(4):before{
+        content: "Adicional:";
+        font-weight: bold;
+        color: #000;
+    }
+    .carro tbody tr td:nth-child(5):before{
+        content: "Precio:";
+        font-weight: bold;
+        color: #000;
+    }
+    .carro tbody tr td:nth-child(6):before{
+        content: "Acción:";
+        font-weight: bold;
+        color: #000;
+    }
+}
+.imagen-carrito{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+.contador{
+    position: absolute;
+    top: 0px;
+    right: 3px;
+}

@@ -9,7 +9,7 @@ $(document).ready(function(){
              let templete='';
              productos.forEach(producto => {
                  templete+=`
-                         <div prodID="${producto.Id_producto}" prodNom="${producto.nombre}" prodPrecio="${producto.precio}"  prodConcentracion="${producto.concentracion}" prodAdicional="${producto.adicional}" prodAvatar="${producto.avatar}" prodTipo="${producto.Id_tipo}" prodPresentacion="${producto.Id_presentacion}" prodLaboratorio="${producto.Id_laboratorio}" class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                         <div prodID="${producto.Id_producto}" prodStock="${producto.stock}" prodNom="${producto.nombre}" prodPrecio="${producto.precio}"  prodConcentracion="${producto.concentracion}" prodAdicional="${producto.adicional}" prodAvatar="${producto.avatar}" prodTipo="${producto.Id_tipo}" prodPresentacion="${producto.presentacion}" prodLaboratorio="${producto.laboratorio}" class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
                          <div class="card bg-light">
                          <div class="card-header text-muted border-bottom-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                              <i class="fas fa-lg fa-cubes mr-1"></i>${producto.stock}
