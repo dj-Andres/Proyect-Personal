@@ -40,6 +40,13 @@
                 return $this->objetos;
             }
         }
+        function buscarId($id_producto){
+            $sql="SELECT id_producto,productos.nombre as nombre,concentracion,adicional,precio,productos.avatar as avatar,tipo_producto.nombre_tipo as tipo,presentacion.presentacion as presentacion ,laboratorio.nombre as laboratorio,id_laboratorio,id_tipo_producto,id_presentacion FROM productos JOIN laboratorio ON prod_lab=id_laboratorio JOIN tipo_producto ON  prod_tip_prod=id_tipo_producto JOIN presentacion ON  prod_present=id_presentacion WHERE productos.id_producto=:id";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array(':id'=>$id_producto));
+            $this->objetos=$query->fetchall();
+            return $this->objetos;
+        }
         function editar($id,$nombre,$concentracion,$adicional,$precio,$laboratorio,$tipo,$presentacion){
             $sql="SELECT id_producto FROM productos WHERE id_producto!=:id AND nombre=:nombre AND concentracion=:concentracion AND adicional=:adicional AND  prod_lab=:laboratorio AND prod_present=:presentacion AND prod_tip_prod=:tipo";
             $query=$this->acceso->prepare($sql);

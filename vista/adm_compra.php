@@ -57,11 +57,11 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
                                 </div>
                                 <div class="form-group row">
                                     <span>Vendedor: </span>
-                                    <h3>usuario</h3>
+                                    <h3><?php echo $_SESSION['nombre']; ?></h3>
                                 </div>
                             </div>
                         </header>
-                        <button id="actualizar"class="btn btn-success">Actualizar</button>
+                        <button id="actualizar"class="btn btn-success m-1"><i class="fas fa-sync-alt"></i></button>
                         <div id="cp"class="card-body p-0">
                             <table class="compra table table-hover text-nowrap">
                                 <thead class='table-success'>
@@ -102,7 +102,7 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
                                             <div class="info-box mb-3 bg-warning">
                                                 <span class="info-box-icon"><i class="fas fa-tag"></i></span>
                                                 <div class="info-box-content">
-                                                    <span class="info-box-text text-left ">IGV</span>
+                                                    <span class="info-box-text text-left ">IVA</span>
                                                     <span class="info-box-number"id="con_igv">2</span>
                                                 </div>
                                             </div>

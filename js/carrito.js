@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    calcular_total();
     recuperarLS_carrito();
     contar_productos();
     recuperarLS_carrito_compra();
@@ -64,15 +65,14 @@ $(document).ready(function(){
         const id=$(elemento).attr('prodId');
         eliminar_producto_LS(id);
         elemento.remove();
-        contador=contar_productos();
-        
+        contar_productos();
+        calcular_total();
     })
     $(document).on('click','#vaciar-carrito',(e)=>{
         // vacia todo los elementos de una fila//
         $('#lista').empty();
         eliminarLS();
-        contar_productos();
-        
+        contar_productos();        
     })
     $(document).on('click','#procesar_pedido',(e)=>{
         procesar_pedido();
@@ -94,20 +94,26 @@ $(document).ready(function(){
     }
     //mostar los productos guardados en el localStorage
     function recuperarLS_carrito(){
-        let productos;
+        let productos,id_producto;
         productos=recuperarLs();
+        funcion='buscar_id';
         productos.forEach(producto => {
-            template=`
-            <tr prodId="${producto.id}">
-                <td>${producto.id}</td>
-                <td>Producto</td>
-                <td>${producto.concentracion}</td>
-                <td>${producto.adicional}</td>
-                <td>${producto.precio}</td>
-                <td><button class="borrar-producto btn btn-danger"><i class="fas fa-times-circle"></i></button></td>
-            </tr>
-            `;
-            $('#lista').append(template);          
+            id_producto=producto.id;
+            $.post('../controlador/controlador-producto.php',{funcion,id_producto},(response)=>{
+                let tempate_carrito='';
+                let json=JSON.parse(response);
+                tempate_carrito=`
+                    <tr prodId="${json.id}">
+                        <td>${json.Id}</td>
+                        <td>Producto</td>
+                        <td>${json.concentracion}</td>
+                        <td>${json.adicional}</td>
+                        <td>${json.precio}</td>
+                        <td><button class="borrar-producto btn btn-danger"><i class="fas fa-times-circle"></i></button></td>
+                    </tr>        
+                `;
+                $('#lista').append(tempate_carrito);
+            })
         });
     }
     function eliminar_producto_LS(id){
@@ -147,44 +153,96 @@ $(document).ready(function(){
     }
     //mostrar los productos añadidos en el carrito de compras para el proceso de compras
     function recuperarLS_carrito_compra(){
-        let productos;
+        let productos,id_producto;
         productos=recuperarLs();
+        funcion='buscar_id';
         productos.forEach(producto => {
-            template=`
-            <tr prodId="${producto.id}">
-                <td>Producto</td>
-                <td>${producto.stock}</td>
-                <td>${producto.precio}</td>
-                <td>${producto.concentracion}</td>
-                <td>${producto.adicional}</td>
-                <td>${producto.laboratorio}</td>
-                <td>${producto.presentacion}</td>
-                <td>
-                    <input type="number" class="form-control producto" min="1" value="${producto.cantidad}">
-                </td>
-                <td class="subtotales">
-                    <h5>${producto.precio*producto.cantidad}</h5>
-                </td>
-                <td><button class="borrar-producto btn btn-danger"><i class="fas fa-times-circle"></i></button></td>
-            </tr>
-            `;
-            $('#lista-compra').append(template);          
+            id_producto=producto.id;
+            $.post('../controlador/controlador-producto.php',{funcion,id_producto},(response)=>{
+                let tempate_compra='';
+                let json=JSON.parse(response);
+                tempate_compra=`
+                    <tr prodId="${producto.id}" prodPrecio="${json.precio}">
+                        <td>Producto</td>
+                        <td>${json.stock}</td>
+                        <td class="precio">${json.precio}</td>
+                        <td>${json.concentracion}</td>
+                        <td>${json.adicional}</td>
+                        <td>${json.laboratorio}</td>
+                        <td>${json.presentacion}</td>
+                        <td>
+                            <input type="number" class="form-control producto" min="1" value="${producto.cantidad}">
+                        </td>
+                        <td class="subtotales">
+                            <h5>${json.precio*producto.cantidad}</h5>
+                        </td>
+                        <td><button class="borrar-producto btn btn-danger"><i class="fas fa-times-circle"></i></button></td>
+                    </tr>
+                `;
+                $('#lista-compra').append(tempate_compra);
+            })
         });
     }
-   // $('#cp').keyup(e=>{
-        //let id,cantidad,producto,productos,montos;
-        //producto=$(this)[0].activeElement.parentElement.parentElement;
-        //id=$(producto).attr('prodId');
-        //cantidad=producto.querySelector('input').value;
-        //montos=document.querySelectorAll('.subtotales');
-        //productos=recuperarLs();
+    $(document).on('click','#actualizar',(e)=>{
+        let productos,precios;
+        precios=document.querySelectorAll('.precio');
+        productos=recuperarLs();
+        productos.forEach( function(producto,indice) {
+            producto.precio=precios[indice].textContent;
+        });
+        localStorage.setItem('productos',JSON.stringify(productos));
+        calcular_total();    
+    })
+    $('#cp').keyup((e)=>{
+        let id,cantidad,producto,productos,montos,precio;
+        producto=$(this)[0].activeElement.parentElement.parentElement
+        id=$(producto).attr('prodId');
+        precio=$(producto).attr('prodPrecio');
+        cantidad=producto.querySelector('input').value;
+        montos=document.querySelectorAll('.subtotales');
+        productos=recuperarLs();
 
-        //productos.forEach(function(prod,indice)  {
-         //   if(prod.id===id){
-           //     prod.cantidad=cantidad;
-            //    montos[indice].innerHTML=`<h5>${cantidad*productos[indice].precio}</h5>`;
-           // }
-        //});
-        //localStorage.setItem('productos',JSON.stringify(producto));
-   // })
+        productos.forEach(function(prod,indice)  {
+            if(prod.id === id){
+                prod.cantidad=cantidad;
+                prod.precio=precio;
+                montos[indice].innerHTML=`<h5>${cantidad*precio}</h5>`;
+            }
+        });
+        localStorage.setItem('productos',JSON.stringify(productos));
+        calcular_total();
+    })
+    function calcular_total(){
+        let productos,subtotal,con_iva,total_sin_descuento,pago,vuelto,descuento;
+        let total=0,IVA=0.12;
+        productos=recuperarLs();
+        productos.forEach(producto => {
+            let subtotal_producto=Number(producto.precio * producto.cantidad);
+            total=total+subtotal_producto;
+        });
+        pago=$('#pago').val();
+        descuento=$('#descuento').val();
+
+        total_sin_descuento=total.toFixed(2);
+        con_iva=parseFloat(total*IVA).toFixed(2);
+        subtotal=parseFloat(total-con_iva).toFixed(2);
+        total=total-descuento;
+        vuelto=pago-total;
+        $('#subtotal').html(subtotal);
+        $('#con_igv').html(con_iva);
+        $('#total_sin_descuento').html(total_sin_descuento);
+        $('#total').html(total);
+        $('#vuelto').html(vuelto);
+    }
 })
+
+
+
+        
+        
+
+
+
+
+
+

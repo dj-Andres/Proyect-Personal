@@ -41,6 +41,34 @@
             $jsonstring=json_encode($json);
             echo $jsonstring;
     }
+    if($_POST['funcion']=='buscar_id'){
+        $id_producto=$_POST['id_producto'];
+        $producto->buscarId($id_producto);
+        $json=array();
+        foreach ($producto->objetos as $objeto) {
+            $producto->obtener_stock($objeto->id_producto);
+            foreach($producto->objetos as $obj){
+                $total=$obj->total;
+            }
+            $json[]=array(
+                'Id_producto'=>$objeto->id_producto,
+                'nombre'=>$objeto->nombre,
+                'concentracion'=>$objeto->concentracion,
+                'adicional'=>$objeto->adicional,
+                'precio'=>$objeto->precio,
+                'stock'=>$total,
+                'laboratorio'=>$objeto->laboratorio,
+                'Id_laboratorio'=>$objeto->id_laboratorio,
+                'tipo'=>$objeto->tipo,
+                'Id_tipo'=>$objeto->id_tipo_producto,
+                'presentacion'=>$objeto->presentacion,
+                'Id_presentacion'=>$objeto->id_presentacion,
+                'avatar'=>'../img/producto/'.$objeto->avatar
+            );
+        }
+        $jsonsting=json_encode($json[0]);
+        echo $jsonsting;
+    }
     if($_POST['funcion']=='editar'){
         $id=$_POST['id'];
         $nombre=$_POST['nombre'];
