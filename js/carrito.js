@@ -259,27 +259,37 @@ $(document).ready(function(){
                 text: 'Ingresar el campo del nombre del cliente!'
             })
         }else{
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Se realizo la compra',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            verificar_Stock().then(error=>{
+                if(error==0){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Se realizo la compra',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'La cantidad solicitada supera al stock del producto!'
+                    })      
+                }
+            });
         }
     }
-    function verificar_Stock(){
-        let productos,id,cantidad;
+    async function verificar_Stock(){
+        let productos;
         funcion='verificar_stock';
         productos=recuperarLs();
-
-        productos.forEach(producto => {
-            id=producto.id;
-            cantidad=producto.cantidad;
-            $.ajax({
-                
-            })
-        });
+        
+        const response= await fetch('../controlador/controlador-producto.php',{
+            method :'POST',
+            headers:{'Content=Type':'application/x-www-form-urlencoded'},
+            body:'funcion='+funcion+'&&productos='+JSON.stringify(productos)
+        })
+        let error=await response.text();
+        return error;
     }
 })
 

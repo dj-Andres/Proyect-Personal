@@ -118,8 +118,24 @@
         $id=$_POST['id'];            
         $producto->borrar($id);
     }
-    if($_POST['funcion']=='verficar_stock'){
+    if($_POST['funcion']=='verificar_stock'){
         $error=0;
-        $producto->verifi
+        $productos=json_decode($_POST['productos']);
+
+        foreach($productos as $objeto){
+            $producto->obtener_stock($objeto->id);
+            foreach($producto->objetos as $key){
+                $total=$key->total;
+            }
+
+            if($total>=$objeto->cantidad && $objeto->cantidad>0){
+                $error=$error+0;
+            }else{
+                $error+$error+1;
+            }
+        }
+
+        echo $error;
+
     }
-?>
+?> 
