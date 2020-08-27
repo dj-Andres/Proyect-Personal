@@ -118,4 +118,8 @@
         $id=$_POST['id'];            
         $producto->borrar($id);
     }
+    if($_POST['funcion']=='verficar_stock'){
+        $error=0;
+        $producto->verifi
+    }
 ?>

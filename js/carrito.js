@@ -77,6 +77,9 @@ $(document).ready(function(){
     $(document).on('click','#procesar_pedido',(e)=>{
         procesar_pedido();
     })
+    $(document).on('click','#procesar-compra',(e)=>{
+        procesar_compra();
+    })
     function recuperarLs(){
         let productos;
         if(localStorage.getItem('productos')===null){
@@ -233,6 +236,50 @@ $(document).ready(function(){
         $('#total_sin_descuento').html(total_sin_descuento);
         $('#total').html(total);
         $('#vuelto').html(vuelto);
+    }
+    //funcion para procesar el pago de producto//
+    function procesar_compra(){
+        let nombre,cedula;
+        nombre=$('#cliente').val();
+        cedula=$('#cedula').val();
+        
+        if(recuperarLs().length==0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No hay producto,Selccionar alguno!'
+            }).then(function(){
+                location.href='../vista/adm_catalogo.php';
+            })
+        }
+        else if(nombre==''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ingresar el campo del nombre del cliente!'
+            })
+        }else{
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Se realizo la compra',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }
+    function verificar_Stock(){
+        let productos,id,cantidad;
+        funcion='verificar_stock';
+        productos=recuperarLs();
+
+        productos.forEach(producto => {
+            id=producto.id;
+            cantidad=producto.cantidad;
+            $.ajax({
+                
+            })
+        });
     }
 })
 
