@@ -261,12 +261,16 @@ $(document).ready(function(){
         }else{
             verificar_Stock().then(error=>{
                 if(error==0){
+                    registar_compra(nombre,cedula);
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
                         title: 'Se realizo la compra',
                         showConfirmButton: false,
                         timer: 1500
+                    }).then(function(){
+                        eliminarLS();
+                        Location.href='../vista/adm_catalogo.php';
                     })
                 }else{
                     Swal.fire({
@@ -285,11 +289,22 @@ $(document).ready(function(){
         
         const response= await fetch('../controlador/controlador-producto.php',{
             method :'POST',
-            headers:{'Content=Type':'application/x-www-form-urlencoded'},
+            headers:{'Content-Type':'application/x-www-form-urlencoded'},
             body:'funcion='+funcion+'&&productos='+JSON.stringify(productos)
         })
         let error=await response.text();
         return error;
+    }
+    function registar_compra(nombre,cedula){
+        funcion='registar_compra';
+        let total=$('#total').get(0).textContent;
+        let productos=recuperarLs();
+        let json=JSON.stringify(productos);
+        
+        $.post('../controlador/controlador-compra.php',{funcion,total,nombre,cedula,json},(response)=>{
+            console.log(response);
+        })
+        
     }
 })
 

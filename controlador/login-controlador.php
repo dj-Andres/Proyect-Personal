@@ -27,6 +27,7 @@
                 $_SESSION['us_tipo']=$objeto->us_tipo;
                 $_SESSION['nombre']=$objeto->nombre;
                 $_SESSION['cedula']=$objeto->cedula;
+                $_SESSION['usuario']=$objeto->id_usuario;
             }
             switch ($_SESSION['us_tipo']) {
                 case '1':
