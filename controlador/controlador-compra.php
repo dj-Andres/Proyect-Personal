@@ -12,7 +12,7 @@
         $nombre=$_POST['nombre'];
         $cedula=$_POST['cedula'];
         $productos=json_decode($_POST['json']);
-
+        print_r($productos);
         date_default_timezone_set('America/Guayaquil');
         $fecha=date('Y-m-d H:i:s');
 

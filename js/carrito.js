@@ -301,7 +301,13 @@ $(document).ready(function(){
         let productos=recuperarLs();
         let json=JSON.stringify(productos);
         
-        $.post('../controlador/controlador-compra.php',{funcion,total,nombre,cedula,json},(response)=>{
+        
+        $.ajax({
+            data:{"funcion":funcion,"nombre":nombre,"cedula":cedula,"total":total,"json":json},            
+            type:"POST",
+            dataType:"json",
+            url:"../controlador/controlador-compra.php",
+        }).done(function(response){
             console.log(response);
         })
         
