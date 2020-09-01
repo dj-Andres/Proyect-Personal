@@ -2,8 +2,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!---Estilos del menu de compras--->
   <link rel="stylesheet" href="../css/main.css">
-    <!---Estilos del pagima de compras--->
-    <link rel="stylesheet" href="../css/compra.css">
+  <!---Estilos del pagima de compras--->
+  <link rel="stylesheet" href="../css/datatables.css">
+  <!---Estilos del pagima de compras--->
+  <link rel="stylesheet" href="../css/compra.css">
   <link rel="shortcut icon" href="../img/LogoSample_ByTailorBrands.ico" type="image/x-icon">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../css/fontawesome-free/css/all.min.css">
@@ -106,6 +108,15 @@
                   <i class="nav-icon fas fa-users"></i>
                   <p>
                     Gestión Usuario
+                  </p>
+                </a>
+              </li>
+              <li class="nav-header">Ventas</li>
+              <li class="nav-item">
+                <a href="adm_venta.php" class="nav-link">
+                  <i class="nav-icon fas fa-notes-medical"></i>
+                  <p>
+                    Listar Ventas
                   </p>
                 </a>
               </li>

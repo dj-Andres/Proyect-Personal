@@ -26,6 +26,13 @@
             $query=$this->acceso->prepare($sql);
             $query->execute(array(':Id_venta'=>$id_venta));
         }
+        public function buscar(){
+            $sql="SELECT id_venta,fecha,cliente,venta.cedula,total,CONCAT(usuario.nombre,' ',usuario.apellido) as vendedor FROM venta JOIN usuario on vendedor=id_usuario";
+            $query=$this->acceso->prepare($sql);
+            $query->execute();
+            $this->objetos=$query->fetchall();
+            return $this->objetos;
+        }
     }
 
 ?>
