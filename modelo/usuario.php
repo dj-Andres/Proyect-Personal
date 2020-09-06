@@ -134,5 +134,12 @@
             echo 'no-borrado';
         }
       }
+      function devolver_avatar($Id_usuario){
+        $sql="SELECT avatar FROM usuario WHERE cedula=:Id_usuario";
+        $query=$this->acceso->prepare($sql);
+        $query->execute(array(':Id_usuario'=>$Id_usuario));
+        $this->objetos=$query->fetchall();      
+        return $this->objetos;
+      }
   }
 ?>

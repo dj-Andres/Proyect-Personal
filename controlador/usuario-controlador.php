@@ -5,6 +5,7 @@
 
     session_start();
     $Id_usuario=$_SESSION['cedula'];
+    $tipo_usuario=$_SESSION['us_tipo'];
     if ($_POST['funcion']=='buscar_usuario') {
         $json=array();
         date_default_timezone_set('America/Guayaquil');
@@ -153,5 +154,21 @@
         $Id_borrado=$_POST['Id_usuario'];
         $usuario->borrar($clave,$Id_borrado,$Id_usuario);
     }
+    if($_POST['funcion']=='devolver_avatar') {
+        $usuario->devolver_avatar($Id_usuario);
+        $json=array();
+        foreach ($usuario->objetos as $objeto) {
+            $json=$objeto;
+        }
+        $jsonstring=json_encode($json);
+        echo $jsonstring;
+    }
 
+    if($_POST['funcion']=='tipo_usuario') {
+        echo $tipo_usuario;
+    }
+
+
+
+    
 ?>

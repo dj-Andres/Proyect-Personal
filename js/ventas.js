@@ -12,7 +12,7 @@ $(document).ready(function(){
         })
 
     }
-    let funcion='listar';
+     funcion='listar';
     //$.post('../controlador/controlador-venta.php',{funcion},(response)=>{
       //  console.log(JSON.parse(response));
    // })

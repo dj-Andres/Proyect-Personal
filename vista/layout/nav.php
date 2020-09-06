@@ -103,7 +103,7 @@
                   </p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li id="gestion_usuario" class="nav-item">
                 <a href="adm_usuario.php" class="nav-link">
                   <i class="nav-icon fas fa-users"></i>
                   <p>
@@ -121,7 +121,7 @@
                 </a>
               </li>
               <li class="nav-header">Almacen</li>
-              <li class="nav-item">
+              <li id="gestion_producto" class="nav-item">
                 <a href="adm_producto.php" class="nav-link">
                   <i class="nav-icon fas fa-pills"></i>
                   <p>
@@ -129,7 +129,7 @@
                   </p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li id="gestion_atributo" class="nav-item">
                 <a href="adm_atributo.php" class="nav-link">
                   <i class="nav-icon fas fa-vials"></i>
                   <p>
@@ -137,7 +137,7 @@
                   </p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li id="gestion_lote" class="nav-item">
                 <a href="adm_lote.php" class="nav-link">
                   <i class="nav-icon fas fa-cubes"></i>
                   <p>
@@ -146,7 +146,7 @@
                 </a>
               </li>
               <li class="nav-header">Compras</li>
-              <li class="nav-item">
+              <li id="gestion_proveedor" class="nav-item">
                 <a href="adm_proveedor.php" class="nav-link">
                   <i class="nav-icon fas fa-truck"></i>
                   <p>
