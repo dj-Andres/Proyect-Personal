@@ -108,7 +108,7 @@ if($_SESSION['us_tipo']==3 || $_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==2
                           <div class="icon">
                             <i class="fas fa-user"></i>
                           </div>
-                          <a href="#" class="small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Más información </font></font><i class="fas fa-arrow-circle-right"></i></a>
+                          <a href="../vista/adm_graficos_ventas.php" class="small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Más información </font></font><i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                       </div>
                       <!-- ./col -->

@@ -4,6 +4,8 @@
   <link rel="stylesheet" href="../css/main.css">
   <!---Estilos del pagima de compras--->
   <link rel="stylesheet" href="../css/datatables.css">
+    <!---Estilos del graficos--->
+    <link rel="stylesheet" href="../css/Chart.min.css">
   <!---Estilos del pagima de compras--->
   <link rel="stylesheet" href="../css/compra.css">
   <link rel="shortcut icon" href="../img/LogoSample_ByTailorBrands.ico" type="image/x-icon">
