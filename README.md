@@ -12,3 +12,5 @@ En este modulo se crea,edita y elimina a los usuarios en mismo que el usuario m�
 ## Modulo de Productos
 En este modulo se realizara la gestión de los productos  en el cual se realizara: la creación,edicion,eliminación del productos a la vez que se podra ingresar la cantidad del stock del producto
 
+![productos](https://user-images.githubusercontent.com/62443346/92520898-f5ae5500-f1e1-11ea-9ad0-e9d8c274af37.png)
+
