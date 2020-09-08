@@ -16,4 +16,6 @@ En este modulo se realizara la gestión de los productos  en el cual se realizar
 
 ## Modulo de Atributos
 Este apartado está relacionado con el modulo de productos, este modulo de atributos se trata sobre las caracteristicas que están relacionados con los productos como son: el laboratorio,presentación y el tipo de producto
+![atributos](https://user-images.githubusercontent.com/62443346/92521620-2773eb80-f1e3-11ea-968d-566899037e4a.png)
+
 
