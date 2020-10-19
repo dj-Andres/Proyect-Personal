@@ -141,5 +141,26 @@
         $this->objetos=$query->fetchall();      
         return $this->objetos;
       }
+      function recuperar_clave($correo,$cedula){
+          $sql="SELECT correo,cedula FROM usuario WHERE cedula=:cedula AND correo=:correo";
+          $query=$this->acceso->prepare($sql);
+
+          $query->execute(array(':cedula'=>$cedula,'correo'=>$correo));
+          $this->objetos=$query->fetchall();
+
+          if(!empty($this->objetos)){
+            $sql="SELECT clave FROM usuario WHERE cedula=:cedula AND correo=:correo";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array(':cedula'=>$cedula,'correo'=>$correo));
+            $this->objetos=$query->fetchall();
+            echo 'recuperado';
+          }else{
+            echo 'no-recuperado';
+          }
+
+
+
+
+      }
   }
 ?>
