@@ -141,26 +141,28 @@
         $this->objetos=$query->fetchall();      
         return $this->objetos;
       }
-      function recuperar_clave($correo,$cedula){
-          $sql="SELECT correo,cedula FROM usuario WHERE cedula=:cedula AND correo=:correo";
-          $query=$this->acceso->prepare($sql);
+      function recuperar_clave($cedula,$correo){
+        $sql="SELECT * FROM usuario WHERE correo=:correo AND cedula=:cedula";
+        $query=$this->acceso->prepare($sql);
+        $query->execute(array(':correo'=>$correo,':cedula'=>$cedula));
+        $this->objetos=$query->fetchall();
 
-          $query->execute(array(':cedula'=>$cedula,'correo'=>$correo));
-          $this->objetos=$query->fetchall();
+        if(!empty($this->objetos)){
+              if($query->rowCount()==1){
+                  echo 'encontrado';
+              }else{
+                echo 'no-encontrado';
+              }
+        }else{
+            echo 'no-encratado';
+        }
 
-          if(!empty($this->objetos)){
-            $sql="SELECT clave FROM usuario WHERE cedula=:cedula AND correo=:correo";
-            $query=$this->acceso->prepare($sql);
-            $query->execute(array(':cedula'=>$cedula,'correo'=>$correo));
-            $this->objetos=$query->fetchall();
-            echo 'recuperado';
-          }else{
-            echo 'no-recuperado';
-          }
-
-
-
-
+      }
+      function reemplazar($codigo,$correo,$cedula){
+        $sql="UPDATE usuario set clave=:codigo WHERE correo=:correo AND cedula=:cedula";
+        $query=$this->acceso->prepare($sql);
+        $query->execute(array(':codigo'=>$codigo,':cedula'=>$cedula,':correo'=>$correo));
+         echo 'reemplazado';
       }
   }
 ?>

@@ -53,20 +53,6 @@
         $jsonstring=json_encode($json[0]);
         echo $jsonstring;
     }
-    if($_POST['funcion']=='recuperar_clave'){
-        $correo=$_POST['correo'];
-        $cedula=$_POST['cedula'];
-        $json=array();
-        $usuario->recuperar_clave($correo,$cedula);   
-
-        foreach ($usuario->objetos as $objeto) {
-            $json[]=array(
-                'clave'=>$objeto->clave
-            );
-        }
-        $jsonstring=json_encode($json);
-        echo $jsonstring;
-    }
     if($_POST['funcion']=='editar_usuario'){
         // esta es la variable que se envia desde el js en la funcion de capturar datos como parametro//
         $Id_usuario=$_POST['Id_usuario'];
@@ -181,6 +167,34 @@
 
     if($_POST['funcion']=='tipo_usuario') {
         echo $tipo_usuario;
+    }
+
+    if($_POST['funcion']=='recuperar_clave') {
+        $cedula=$_POST['cedula'];
+        $correo=$_POST['correo'];
+
+        $usuario->recuperar_clave($cedula,$correo);
+    }
+    if($_POST['funcion']=='generar') {
+        $cedula=$_POST['cedula'];
+        $correo=$_POST['correo'];
+
+        $codigo=generar(10);
+
+        $usuario->reemplazar($codigo,$correo,$cedula);
+    }
+
+    function generar($longitud){
+        $key="";
+        $patron="1234567890abcdefghijklnñmopqrszws";
+        $max=strlen($patron)-1;
+
+        for ($i=0; $i < $longitud ; $i++) { 
+            $key.=$patron{mt_rand(0,$max)};
+        }
+
+        return $key;
+
     }
     
 ?>

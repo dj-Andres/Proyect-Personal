@@ -19,15 +19,17 @@
                         <h1 class="text-light">Recuperar Contraseña</h1>
                     </div>
                     <div class="form-group mx-sm-4 pt-3">
-                        <input type="text" name="cedula" id="cedula" class="form-control" placeholder="Ingrese su cedula" required>
+                        <input type="text" name="cedula" id="cedula" class="form-control" placeholder="Ingrese su cedula">
                     </div>
                     <div class="form-group mx-sm-4 pt-3">
-                        <input type="emai" name="correo" id="correo" class="form-control" placeholder="Ingrese su correo" required>
+                        <input type="emai" name="correo" id="correo" class="form-control" placeholder="Ingrese su correo">
                     </div>
                     <div class="from-group mx-sm-4 pb-2">
                         <input type="submit" value="Recuperar" class="btn btn-block ingresar">
                     </div>
                 </form> 
+                <span id="aviso1" class="text-success text-bold">Texto</span>
+                <span id="aviso2" class="text-danger text-bold">Texto</span>
             </div>
         </div>
     </div>
