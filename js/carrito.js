@@ -242,6 +242,7 @@ $(document).ready(function(){
         let nombre,cedula;
         nombre=$('#cliente').val();
         cedula=$('#cedula').val();
+        total=$("#total").val();
         
         if(recuperarLs().length==0){
             Swal.fire({

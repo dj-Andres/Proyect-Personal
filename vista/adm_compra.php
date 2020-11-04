@@ -177,6 +177,7 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3 || $_SESSION['us_tipo']==2
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <a href="#" class="btn btn-success btn-block" id="procesar-compra">Realizar compra</a>
+                                <div id="paypal-button-container"></div>
                             </div>
                         </div>
                     </div>
@@ -197,3 +198,35 @@ include_once 'layout/footer.php';
 }
 ?>
 <script src="../js/carrito.js"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+        paypal.Button.render({
+            env:'sandbox',
+            style:{
+                label:'checkout',
+                size:'responsive',
+                shape:'pill',
+                color:'gold'
+            },
+            client:{
+                sandbox:'id'
+            },
+            payment:function(data,actions){
+                return actions.payment.create({
+                    payment:{
+                        transactions:[
+                            {
+                                amount:{total:'100',currency:'USD'}
+                            }
+                        ]
+                    }       
+                });
+            },
+            onAuthorize:function(data,actions){
+                return actions.payment.execute().then(function(){
+                    window.alert('Transacción Completada');
+                });
+            }
+        },'#paypal-button-container');
+    
+</script>
