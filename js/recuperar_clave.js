@@ -12,13 +12,13 @@ $(document).ready(function(){
         }else{
             $('#aviso2').hide();
             let funcion="recuperar_clave";
-            $.post('../controlador/usuario-controlador.php',{funcion,cedula,correo},(response)=>{
+            $.post('../controlador/controlador-recuperar.php',{funcion,cedula,correo},(response)=>{
                 console.log(response);
                 if(response=='encontrado'){
                     let funcion="generar";
                     $('#aviso2').hide();
-                    $.post('../controlador/usuario-controlador.php',{funcion,cedula,correo},(response2)=>{
-                        //console.log(response2);
+                    $.post('../controlador/controlador-recuperar.php',{funcion,cedula,correo},(response2)=>{
+                        console.log(response2);
                         $('#aviso1').hide();
                         $('#aviso2').hide();
                         if(response2=='reemplazado'){
