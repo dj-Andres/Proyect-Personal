@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!---CSS---->
     <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/sweetalert2.css">
     <link rel="shortcut icon" href="../img/LogoSample_ByTailorBrands.ico" type="image/x-icon">
 </head>
 <body>
@@ -37,6 +38,7 @@
     <script src="../js/jquery.min.js"></script>
     <!---BOOTSTRAP---->
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/sweetalert2.js"></script>
     <script src="../js/recuperar_clave.js"></script>
 </body>
 </html>

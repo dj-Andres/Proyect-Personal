@@ -312,5 +312,13 @@ $(document).ready(function(){
             }
           })        
    })
-    
+   $(document).on('click','#boton_reporte',(event)=>{
+        funcion='reporte';
+        console.log(funcion);
+        $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
+            console.log(response);
+            window.open('../pdf/pdf-'+funcion+'.pdf','_blank')
+        })
+
+    })
 })

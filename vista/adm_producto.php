@@ -168,7 +168,10 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestión Producto <button type="button" data-toggle="modal" data-target="#crear-producto" class="btn bg-gradient-primary ml-2" id="boton-crear">Crear Producto</button> </h1>
+            <h1>Gestión Producto 
+                <button type="button" data-toggle="modal" data-target="#crear-producto" class="btn bg-gradient-primary ml-2" id="boton-crear">Crear Producto</button> 
+                <button type="button" class="btn bg-gradient-success ml-2" id="boton_reporte">Crear Reporte</button> 
+            </h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

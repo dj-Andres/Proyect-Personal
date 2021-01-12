@@ -138,4 +138,41 @@
         echo $error;
 
     }
+    if($_POST['funcion']=='reporte'){
+        require('../lib/pdf/mpdf.php');
+        $html='<table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Concentración</th>
+                            <th scope="col">Adicional</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Presentación</th>
+                            <th scope="col">Laboratorio</th>
+                        </tr>
+                    </thead>';
+
+        $producto->reporte_producto();
+        foreach ($producto->objetos as $objeto) {
+            $html.='
+            <tbody>
+                <tr>
+                    <th scope="row">'.$objeto->nombre.'</th>
+                    <td>'.$objeto->concentracion.'</td>
+                    <td>'.$objeto->adicional.'</td>
+                    <td>'.$objeto->precio.'</td>
+                    <td>'.$objeto->tipo.'</td>
+                    <td>'.$objeto->presentacion.'</td>
+                    <td>'.$objeto->laboratorio.'</td>
+                </tr>
+            </tbody>
+            </table>';
+        }
+        $mpdf=new mPDF('c','A4');
+        $css=file_get_contents('../css/bootstrap.min.css');
+        //$mpdf->writeHTML($css);
+        $mpdf->writeHTML($html);
+        $mpdf->Output("../pdf/pdf-".$_POST['funcion'].".pdf","F");
+    }
 ?> 
