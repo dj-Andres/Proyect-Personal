@@ -315,10 +315,74 @@ $(document).ready(function(){
    $(document).on('click','#boton_reporte',(event)=>{
         funcion='reporte';
         console.log(funcion);
+        mostrarLoader('reporte_pdf');
         $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
             console.log(response);
-            window.open('../pdf/pdf-'+funcion+'.pdf','_blank')
+            ///mostrarLoader('reporte_pdf');
+            //if (response=="") {
+                //cerrarLoader('exito_reporte');
+                window.open('../pdf/pdf-'+funcion+'.pdf','_blank');   
+            //}else{
+              //  cerrarLoader('error_reporte');
+            //}
         })
 
+    })
+    function mostrarLoader(mensaje){
+        var texto=null;
+        var mostrar=false;
+
+        switch (mensaje) {
+            case 'reporte_pdf':
+                texto='Se creando el documento PDF por favor espere...';
+                mostrar=true;
+                break;
+        }
+        if(mostrar){
+            Swal.fire({
+                title: 'Creando PDF',
+                text: texto,
+                showConfirmButton:false
+            })
+        }
+    }
+    function cerrarLoader(mensaje){
+        var tipo=null;
+        var texto=null;
+        var mostrar=false;
+
+        switch (mensaje) {
+            case 'exito_reporte':
+                tipo='success';
+                texto='El reporte fue generado correctamente!';
+                mostrar=true;
+            break;
+
+            case 'error_reporte':
+                tipo='error';
+                texto='El reporte no pudo generarse comunicarse con el departamento de Sistemas!';
+                mostrar=true;
+            break;
+
+            default:
+                Swal.close();    
+            break;
+        }
+
+        if(mostrar){
+            Swal.fire({
+                position:'center',
+                icon: tipo,
+                text: texto,
+                showConfirmButton:false
+            })
+        }
+    }
+    $(document).on('click','#reporte_excel',(event)=>{
+        funcion='reporte_excel';
+        console.log(funcion);
+        $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
+            console.log(response);
+        })
     })
 })

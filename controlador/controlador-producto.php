@@ -170,9 +170,52 @@
             </table>';
         }
         $mpdf=new mPDF('c','A4');
-        $css=file_get_contents('../css/bootstrap.min.css');
-        //$mpdf->writeHTML($css);
+        $mpdf->SetDisplayMode('fullpage');
+        //$css=file_get_contents('../css/bootstrap.min.css');
+        //$mpdf->writeHTML($css,1);
         $mpdf->writeHTML($html);
         $mpdf->Output("../pdf/pdf-".$_POST['funcion'].".pdf","F");
+    }
+    if($_POST['funcion']=='reporte_excel'){
+        error_reporting(E_ALL);
+        ini_set('display_errors', TRUE);
+        ini_set('display_startup_errors', TRUE);
+        date_default_timezone_set('America/Guayaquil');
+
+        require('../lib/Classes/PHPExcel.php');
+        $producto->reporte_producto();
+        $row=2;
+        $objetoExcel=new PHPExcel();
+
+        $objetoExcel->getProperties()->setCreator("Diego Jimenez")->setDescription("Reporte Productos");
+        $objetoExcel->setActiveSheetIndex(0);
+        $objetoExcel->getActiveSheet()->setTitle("Productos");
+
+        $objetoExcel->getActiveSheet()->setCellValue('A1','Nombre');
+        $objetoExcel->getActiveSheet()->setCellValue('B1','Concentracion');
+        $objetoExcel->getActiveSheet()->setCellValue('C1','Adicional');
+        $objetoExcel->getActiveSheet()->setCellValue('D1','Precio');
+        $objetoExcel->getActiveSheet()->setCellValue('E1','Tipo');
+        $objetoExcel->getActiveSheet()->setCellValue('F1','Presentacion');
+        $objetoExcel->getActiveSheet()->setCellValue('G1','Laboratorio');
+
+        foreach ($producto->objetos as $objeto) {
+            $objetoExcel->getActiveSheet()->setCellValue('A'.$row,$objeto->nombre);
+            $objetoExcel->getActiveSheet()->setCellValue('B'.$row,$objeto->concentracion);
+            $objetoExcel->getActiveSheet()->setCellValue('C'.$row,$objeto->adicional);
+            $objetoExcel->getActiveSheet()->setCellValue('D'.$row,$objeto->precio);
+            $objetoExcel->getActiveSheet()->setCellValue('E'.$row,$objeto->tipo);
+            $objetoExcel->getActiveSheet()->setCellValue('F'.$row,$objeto->presentacion);
+            $objetoExcel->getActiveSheet()->setCellValue('G'.$row,$objeto->laboratorio);
+
+            $row++;
+        }     
+
+        header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+	    header('Content-Disposition: attachment;filename="Productos.xlsx"');
+        header('Cache-Control: max-age=0');
+        
+        $objWriter=PHPExcel_IOFactory::createWriter($objetoExcel,'Excel2007');
+        $objWriter->save('php://output');
     }
 ?> 
