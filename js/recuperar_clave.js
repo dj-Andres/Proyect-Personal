@@ -23,16 +23,16 @@ $(document).ready(function(){
                         console.log(response2);
                         $('#aviso1').hide();
                         $('#aviso2').hide();
-                        if(response2=='reemplazado'){
+                        if(response2=='enviado'){
                             cerrarLoader('exito_envio');        
                             $('#aviso1').show();
                             $('#aviso1').text('Se establecio correctamente la contraseña');
-                            $('##form-recuperar-clave').trigger('reset');
+                            $('#form-recuperar-clave').trigger('reset');
                         }else{
                             cerrarLoader('error_envio');
                             $('#aviso2').show();
                             $('#aviso2').text('No se pudo reestablecer la contraseña');
-                            $('##form-recuperar-clave').trigger('reset');
+                            $('#form-recuperar-clave').trigger('reset');
                         }
                     });
                 }else{
@@ -61,7 +61,7 @@ $(document).ready(function(){
             Swal.fire({
                 title: 'Enviando correo',
                 text: texto,
-                showConfirmation:false
+                showConfirmButton:false
             })
         }
     }
@@ -99,7 +99,7 @@ $(document).ready(function(){
                 position:'center',
                 icon: tipo,
                 text: texto,
-                showConfirmation:false
+                showConfirmButton:false
             })
         }
     }
