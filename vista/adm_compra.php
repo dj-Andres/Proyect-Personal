@@ -200,6 +200,13 @@ include_once 'layout/footer.php';
 <script src="../js/carrito.js"></script>
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <script>
+        ocultar();
+        function ocultar(){
+            $('#paypal-button-container').load(function(){
+                $('#paypal-button-container').hide();
+            });
+        }
+        
         paypal.Button.render({
             env:'sandbox',
             style:{

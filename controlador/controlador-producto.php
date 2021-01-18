@@ -1,6 +1,11 @@
 <?php 
     include_once '../modelo/producto.php';
 
+    use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+    require '../vendor/autoload.php';
+
     $producto=new producto();
 
     if($_POST['funcion']=='crear'){
@@ -139,83 +144,80 @@
 
     }
     if($_POST['funcion']=='reporte'){
-        require('../lib/pdf/mpdf.php');
-        $html='<table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Concentración</th>
-                            <th scope="col">Adicional</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Presentación</th>
-                            <th scope="col">Laboratorio</th>
-                        </tr>
-                    </thead>';
 
+        $html = '<table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Concentración</th>
+                                <th scope="col">Adicional</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Presentación</th>
+                                <th scope="col">Laboratorio</th>
+                            </tr>
+                        </thead>';
         $producto->reporte_producto();
         foreach ($producto->objetos as $objeto) {
-            $html.='
-            <tbody>
-                <tr>
-                    <th scope="row">'.$objeto->nombre.'</th>
-                    <td>'.$objeto->concentracion.'</td>
-                    <td>'.$objeto->adicional.'</td>
-                    <td>'.$objeto->precio.'</td>
-                    <td>'.$objeto->tipo.'</td>
-                    <td>'.$objeto->presentacion.'</td>
-                    <td>'.$objeto->laboratorio.'</td>
-                </tr>
-            </tbody>
-            </table>';
+            $html .= '
+                            <tbody>
+                                <tr>
+                                    <th scope="row">' . $objeto->nombre . '</th>
+                                    <td>' . $objeto->concentracion . '</td>
+                                    <td>' . $objeto->adicional . '</td>
+                                    <td>' . $objeto->precio . '</td>
+                                    <td>' . $objeto->tipo . '</td>
+                                    <td>' . $objeto->presentacion . '</td>
+                                    <td>' . $objeto->laboratorio . '</td>
+                                </tr>
+                            </tbody>
+                            </table>';
         }
-        $mpdf=new mPDF('c','A4');
-        $mpdf->SetDisplayMode('fullpage');
-        //$css=file_get_contents('../css/bootstrap.min.css');
-        //$mpdf->writeHTML($css,1);
-        $mpdf->writeHTML($html);
+
+        $mpdf = new \Mpdf\Mpdf();
+        $css=file_get_contents("../css/bootstrap.min.css");
+        $mpdf-> WriteHTML($css, \Mpdf\HTMLParseMode::HEADER_CSS);
+        $mpdf-> WriteHTML($html, \Mpdf\HTMLParseMode::HTML_BODY);
         $mpdf->Output("../pdf/pdf-".$_POST['funcion'].".pdf","F");
+
     }
     if($_POST['funcion']=='reporte_excel'){
-        error_reporting(E_ALL);
-        ini_set('display_errors', TRUE);
-        ini_set('display_startup_errors', TRUE);
-        date_default_timezone_set('America/Guayaquil');
-
-        require('../lib/Classes/PHPExcel.php');
+        
         $producto->reporte_producto();
+        
         $row=2;
-        $objetoExcel=new PHPExcel();
 
-        $objetoExcel->getProperties()->setCreator("Diego Jimenez")->setDescription("Reporte Productos");
-        $objetoExcel->setActiveSheetIndex(0);
-        $objetoExcel->getActiveSheet()->setTitle("Productos");
+        $documento=new Spreadsheet();
 
-        $objetoExcel->getActiveSheet()->setCellValue('A1','Nombre');
-        $objetoExcel->getActiveSheet()->setCellValue('B1','Concentracion');
-        $objetoExcel->getActiveSheet()->setCellValue('C1','Adicional');
-        $objetoExcel->getActiveSheet()->setCellValue('D1','Precio');
-        $objetoExcel->getActiveSheet()->setCellValue('E1','Tipo');
-        $objetoExcel->getActiveSheet()->setCellValue('F1','Presentacion');
-        $objetoExcel->getActiveSheet()->setCellValue('G1','Laboratorio');
+        $excel=$documento->getActiveSheet();
+
+        $excel->setCellValue('A1','Nombre');
+        $excel->setCellValue('B1','Concentracion');
+        $excel->setCellValue('C1','Adicional');
+        $excel->setCellValue('D1','Precio');
+        $excel->setCellValue('E1','Tipo');
+        $excel->setCellValue('F1','Presentacion');
+        $excel->setCellValue('G1','Laboratorio');
 
         foreach ($producto->objetos as $objeto) {
-            $objetoExcel->getActiveSheet()->setCellValue('A'.$row,$objeto->nombre);
-            $objetoExcel->getActiveSheet()->setCellValue('B'.$row,$objeto->concentracion);
-            $objetoExcel->getActiveSheet()->setCellValue('C'.$row,$objeto->adicional);
-            $objetoExcel->getActiveSheet()->setCellValue('D'.$row,$objeto->precio);
-            $objetoExcel->getActiveSheet()->setCellValue('E'.$row,$objeto->tipo);
-            $objetoExcel->getActiveSheet()->setCellValue('F'.$row,$objeto->presentacion);
-            $objetoExcel->getActiveSheet()->setCellValue('G'.$row,$objeto->laboratorio);
-
+            $excel->setCellValue('A'.$row,$objeto->nombre);
+            $excel->setCellValue('B'.$row,$objeto->concentracion);
+            $excel->setCellValue('C'.$row,$objeto->adicional);
+            $excel->setCellValue('D'.$row,$objeto->precio);
+            $excel->setCellValue('E'.$row,$objeto->tipo);
+            $excel->setCellValue('F'.$row,$objeto->presentacion);
+            $excel->setCellValue('G'.$row,$objeto->laboratorio);
+            
             $row++;
-        }     
+        }
 
-        header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-	    header('Content-Disposition: attachment;filename="Productos.xlsx"');
+        $nombreDelDocumento = "reporte_productos.xlsx";
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
         header('Cache-Control: max-age=0');
-        
-        $objWriter=PHPExcel_IOFactory::createWriter($objetoExcel,'Excel2007');
-        $objWriter->save('php://output');
+
+        $writter=new Xlsx($documento);
+        $writter->save('../excel/reporte_producto.xlsx');     
     }
 ?> 

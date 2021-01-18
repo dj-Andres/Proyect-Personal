@@ -11,9 +11,11 @@
             $lote->crear($id_producto,$proveedor,$stock,$vencimiento);
         }
         if($_POST['funcion']=='buscar'){
-            date_default_timezone_set('America/Guayaquil');
             $lote->buscar();
-            $fecha_actual=new DateTime();
+            $json=array();
+            date_default_timezone_set('America/Guayaquil');
+            $fecha=date('Y-m-d H:i:s');
+            $fecha_actual=new DateTime($fecha);
             foreach ($lote->objetos as $objeto) {
                 $vencimiento=new DateTime($objeto->vencimiento);
                 $diferencia=$vencimiento->diff($fecha_actual);

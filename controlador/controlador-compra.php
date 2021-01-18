@@ -59,7 +59,7 @@
                     }
                 }
                 $subtotal=$prod->cantidad*$prod->precio;
-                $con->exec("INSERT INTO venta_producto(cantidad,subtotal,producto_Id_producto,venta_Id_venta)VALUES('$prod->cantidad','$subtotal','$prod->id','$id_venta')");
+                $con->exec("INSERT INTO venta_producto(cantidad,precio,subtotal,producto_Id_producto,venta_Id_venta)VALUES('$prod->cantidad','$prod->precio','$subtotal','$prod->id','$id_venta')");
                 $con->commit();
             }
 

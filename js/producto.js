@@ -318,15 +318,29 @@ $(document).ready(function(){
         mostrarLoader('reporte_pdf');
         $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
             console.log(response);
-            ///mostrarLoader('reporte_pdf');
-            //if (response=="") {
-                //cerrarLoader('exito_reporte');
+            mostrarLoader('reporte_pdf');
+            if (response=='') {
+                cerrarLoader('exito_reporte');
                 window.open('../pdf/pdf-'+funcion+'.pdf','_blank');   
-            //}else{
-              //  cerrarLoader('error_reporte');
-            //}
+            }else{
+                cerrarLoader('error_reporte');
+            }
         })
 
+    })
+    $(document).on('click','#reporte_excel',(event)=>{
+        funcion='reporte_excel';
+        console.log(funcion);
+        $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
+            console.log(response);
+             mostrarLoader('reporte_excel');
+            if (response== '') {
+                cerrarLoader('exito_reporte');
+                window.open('../excel/reporte_producto.xlsx','_blank');   
+            }else{
+                cerrarLoader('error_reporte');
+            }
+        })
     })
     function mostrarLoader(mensaje){
         var texto=null;
@@ -335,6 +349,10 @@ $(document).ready(function(){
         switch (mensaje) {
             case 'reporte_pdf':
                 texto='Se creando el documento PDF por favor espere...';
+                mostrar=true;
+                break;
+            case 'reporte_excel':
+                texto='Se esta el reporte EXCEL por favor espere...';
                 mostrar=true;
                 break;
         }
@@ -378,11 +396,5 @@ $(document).ready(function(){
             })
         }
     }
-    $(document).on('click','#reporte_excel',(event)=>{
-        funcion='reporte_excel';
-        console.log(funcion);
-        $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
-            console.log(response);
-        })
-    })
+    
 })

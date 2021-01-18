@@ -79,6 +79,7 @@ $(document).ready(function(){
     })
     $(document).on('click','#procesar-compra',(e)=>{
         procesar_compra();
+        $('#paypal-button-container').show();
     })
     function recuperarLs(){
         let productos;
