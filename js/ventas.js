@@ -32,7 +32,7 @@ $(document).ready(function(){
             { "data": "total" },
             { "data": "vendedor" },
             { "defaultContent": `
-                <button class="btn btn-secondary"><i class="fas fa-print"></i></button>
+                <button class="pdf btn btn-secondary"><i class="fas fa-print"></i></button>
                 <button class="ver btn btn-success" type="button" data-toggle="modal" data-target="#vista_venta"><i class="fas fa-search"></i></button>
                 <button class="btn btn-danger"><i class="fas fa-window-close"></i></button>
             `}
@@ -72,6 +72,9 @@ $(document).ready(function(){
             $('#registros').html(template);  
         })
     })
+    $('#tabla_venta tbody').on('click','.pdf',function(){
+        console.log('click');
+    });
     
 })
 let espanol={

@@ -144,40 +144,67 @@
 
     }
     if($_POST['funcion']=='reporte'){
+        date_default_timezone_set('America/Guayaquil');
+        $fecha=date('Y-m-d H:i:s');
 
-        $html = '<table class="table">
+        $html = '
+        <header>
+            <div>
+                <img src="../img/LogoSample_ByTailorBrands.jpg" width="90" height="90" style:"text-align:center;">
+            </div>
+            <h1 style="text-align:center;">Reportes de Productos</h1>
+            <div>
+                <div>
+                    <span>Fecha y Hora</span>' .$fecha.'
+                </div>
+            </div>
+        </header>
+        <br>
+        <table class="table">
                         <thead>
                             <tr>
+                                <th scope="col">N°</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Concentración</th>
                                 <th scope="col">Adicional</th>
                                 <th scope="col">Precio</th>
+                                <th scope="col">Stock</th>
                                 <th scope="col">Tipo</th>
                                 <th scope="col">Presentación</th>
                                 <th scope="col">Laboratorio</th>
                             </tr>
-                        </thead>';
+                        </thead>
+                        <tbody>';
         $producto->reporte_producto();
+        $contador=0;
         foreach ($producto->objetos as $objeto) {
-            $html .= '
-                            <tbody>
-                                <tr>
-                                    <th scope="row">' . $objeto->nombre . '</th>
-                                    <td>' . $objeto->concentracion . '</td>
-                                    <td>' . $objeto->adicional . '</td>
-                                    <td>' . $objeto->precio . '</td>
-                                    <td>' . $objeto->tipo . '</td>
-                                    <td>' . $objeto->presentacion . '</td>
-                                    <td>' . $objeto->laboratorio . '</td>
-                                </tr>
-                            </tbody>
-                            </table>';
-        }
+            $contador++;
 
-        $mpdf = new \Mpdf\Mpdf();
-        $css=file_get_contents("../css/bootstrap.min.css");
-        $mpdf-> WriteHTML($css, \Mpdf\HTMLParseMode::HEADER_CSS);
-        $mpdf-> WriteHTML($html, \Mpdf\HTMLParseMode::HTML_BODY);
+            $producto->obtener_stock($objeto->id_producto);
+            foreach($producto->objetos as $key){
+                $total=$key->total;
+            }
+
+            $html .= '
+                            
+                        <tr>
+                            <th scope="row">'.$contador.'</th>
+                            <td>'.$objeto->nombre.'</td>
+                            <td>'.$objeto->concentracion.'</td>
+                            <td>'.$objeto->adicional. '</td>
+                            <td>'.$objeto->precio.'</td>
+                            <td>'.$total.'</td>
+                            <td>'.$objeto->tipo.'</td>
+                            <td>'.$objeto->presentacion.'</td>
+                            <td>'.$objeto->laboratorio.'</td>
+                        </tr>';
+        }
+        $html.='</tbody>
+        </table>';
+        $mpdf= new \Mpdf\Mpdf();
+        //$css=file_get_contents("../css/bootstrap.min.css");
+        //$mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
+        $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
         $mpdf->Output("../pdf/pdf-".$_POST['funcion'].".pdf","F");
 
     }

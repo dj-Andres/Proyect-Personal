@@ -319,12 +319,12 @@ $(document).ready(function(){
         $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
             console.log(response);
             mostrarLoader('reporte_pdf');
-            if (response=='') {
-                cerrarLoader('exito_reporte');
+            //if (response=="") {
+                //cerrarLoader('exito_reporte');
                 window.open('../pdf/pdf-'+funcion+'.pdf','_blank');   
-            }else{
-                cerrarLoader('error_reporte');
-            }
+            //}//else{
+               // cerrarLoader('error_reporte');
+           // }
         })
 
     })
