@@ -61,7 +61,7 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3 || $_SESSION['us_tipo']==2
                                 </div>
                             </div>
                         </header>
-                        <button id="actualizar"class="btn btn-success m-1"><i class="fas fa-sync-alt"></i></button>
+                        <button id="actualizar"class="btn btn-success m-1"><i class="fas fa-sync-alt"></i> Actualizar</button>
                         <div id="cp"class="card-body p-0">
                             <table class="compra table table-hover text-nowrap">
                                 <thead class='table-success'>
@@ -177,7 +177,6 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3 || $_SESSION['us_tipo']==2
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <a href="#" class="btn btn-success btn-block" id="procesar-compra">Realizar compra</a>
-                                <div id="paypal-button-container"></div>
                             </div>
                         </div>
                     </div>

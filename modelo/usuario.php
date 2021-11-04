@@ -171,6 +171,5 @@
         $sql="UPDATE usuario set clave=:codigo WHERE correo=:correo AND cedula=:cedula";
         $query=$this->acceso->prepare($sql);
         $query->execute(array(':codigo'=>$codigo,':cedula'=>$cedula,':correo'=>$correo));
-         //echo 'reemplazado';
       }
   }

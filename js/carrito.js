@@ -94,7 +94,6 @@ $(document).ready(function(){
         productos.push(producto);
         localStorage.setItem('productos',JSON.stringify(productos));
     }
-    //mostar los productos guardados en el localStorage
     function recuperarLS_carrito(){
         let productos,id_producto;
         productos=recuperarLs();
@@ -153,7 +152,6 @@ $(document).ready(function(){
             location.href='../vista/adm_compra.php';
         }
     }
-    //mostrar los productos añadidos en el carrito de compras para el proceso de compras
     function recuperarLS_carrito_compra(){
         let productos,id_producto;
         productos=recuperarLs();
@@ -236,7 +234,6 @@ $(document).ready(function(){
         $('#total').html(total);
         $('#vuelto').html(vuelto);
     }
-    //funcion para procesar el pago de producto//
     function procesar_compra(){
         let nombre,cedula;
         nombre=$('#cliente').val();
@@ -291,7 +288,7 @@ $(document).ready(function(){
             method :'POST',
             headers:{'Content-Type':'application/x-www-form-urlencoded'},
             body:'funcion='+funcion+'&&productos='+JSON.stringify(productos)
-        })
+        });
         let error=await response.text();
         return error;
     }
@@ -301,16 +298,9 @@ $(document).ready(function(){
         let productos=recuperarLs();
         let json=JSON.stringify(productos);
 
-
-        $.ajax({
-            data:{"funcion":funcion,"nombre":nombre,"cedula":cedula,"total":total,"json":json},
-            type:"POST",
-            dataType:"json",
-            url:"../controlador/controlador-compra.php",
-        }).done(function(response){
+        $.post('../controlador/controlador-compra.php',{funcion,total,nombre,cedula,json},(response)=>{
             console.log(response);
-        })
-
+        });
     }
 })
 

@@ -125,14 +125,14 @@ if ($_POST['funcion'] == 'verificar_stock') {
 
     foreach ($productos as $objeto) {
         $producto->obtener_stock($objeto->id);
-        foreach ($producto->objetos as $key) {
-            $total = $key->total;
+        foreach ($producto->objetos as $obj) {
+            $total = $obj->total;
         }
 
         if ($total >= $objeto->cantidad && $objeto->cantidad > 0) {
             $error = $error + 0;
         } else {
-            $error + $error + 1;
+            $error = $error + 1;
         }
     }
 
