@@ -14,7 +14,7 @@
         $query->execute(array(':usuario' =>$usuario,'clave'=>$clave));
         $this->objetos = $query->fetchall();
         return $this->objetos;
-            
+
       }
       function obtener_datos($id){
         $sql="SELECT * FROM usuario  join tipo_us on us_tipo=Id_tipo_us  AND cedula=:id";
@@ -48,13 +48,13 @@
         $query=$this->acceso->prepare($sql);
         $query->execute(array(':Id_usuario'=>$Id_usuario));
         $this->objetos=$query->fetchall();
-        
+
             $sql="UPDATE usuario SET avatar=:nombre_foto WHERE cedula=:Id_usuario";
             $query=$this->acceso->prepare($sql);
             $query->execute(array(':Id_usuario'=>$Id_usuario,':nombre_foto'=>$nombre_foto));
-            
+
         return $this->objetos;
-        
+
       }
       function buscar(){
         if(!empty($_POST['consulta'])){
@@ -72,17 +72,26 @@
             return $this->objetos;
         }
       }
-      function crear($nombre,$apellido,$cedula,$nacimiento,$clave,$tipo,$avatar){
+      function crear($cedula,$nombre,$apellido,$nacimiento,$clave,$avatar){
         $sql="SELECT cedula FROM usuario  WHERE cedula=:cedula";
         $query=$this->acceso->prepare($sql);
         $query->execute(array(':cedula'=>$cedula));
         $this->objetos=$query->fetchall();
         if(!empty($this->objetos)){
-            echo 'nocrear';                      
+            echo 'nocrear';
         }else{
-            $sql="INSERT INTO usuario(cedula,nombre,apellido,edad,clave,avatar,us_tipo) VALUES(:cedula,:nombre,:apllido,:edad,:clave,:avatar,:tipo)";
+            $sql="INSERT INTO usuario(cedula,nombre,apellido,edad,clave,avatar,us_tipo)
+              VALUES(:cedula,:nombre,:apllido,:edad,:clave,:avatar,2)";
             $query=$this->acceso->prepare($sql);
-            $query->execute(array(':cedula'=>$cedula,':nombre'=>$nombre,':apellido'=>$apellido,':edad'=>$nacimiento,':clave'=>$clave,':avatar'=>$avatar,':tipo'=>$tipo));
+            $query->execute(
+              [':cedula' => $cedula,
+                ':nombre' => $nombre,
+                ':apellido' => $apellido,
+                ':edad'=>$nacimiento,
+                ':clave'=>$clave,
+                ':avatar'=>$avatar
+              ]
+            );
             echo 'crear';
         }
       }
@@ -138,7 +147,7 @@
         $sql="SELECT avatar FROM usuario WHERE cedula=:Id_usuario";
         $query=$this->acceso->prepare($sql);
         $query->execute(array(':Id_usuario'=>$Id_usuario));
-        $this->objetos=$query->fetchall();      
+        $this->objetos=$query->fetchall();
         return $this->objetos;
       }
       function recuperar_clave($cedula,$correo){
@@ -165,4 +174,3 @@
          //echo 'reemplazado';
       }
   }
-?>

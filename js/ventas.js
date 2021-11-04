@@ -3,7 +3,7 @@ $(document).ready(function(){
     function mostrar_consultas(){
         let funcion='mostrar_consultas';
         $.post('../controlador/controlador-venta.php',{funcion},(response)=>{
-            //console.log(response);
+            console.log(response);
             const vistas=JSON.parse(response);
             $('#venta_dia_vendedor').html(vistas.venta_dia_vendedor);
             $('#venta_diaria').html(vistas.venta_diaria);
@@ -13,11 +13,6 @@ $(document).ready(function(){
 
     }
      funcion='listar';
-    //$.post('../controlador/controlador-venta.php',{funcion},(response)=>{
-      //  console.log(JSON.parse(response));
-   // })
-
-    //uso de datatable//
     let datatable=$('#tabla_venta').DataTable( {
         "ajax": {
             "url":"../controlador/controlador-venta.php",
@@ -69,13 +64,13 @@ $(document).ready(function(){
                     </tr>
                 `;
             });
-            $('#registros').html(template);  
+            $('#registros').html(template);
         })
     })
     $('#tabla_venta tbody').on('click','.pdf',function(){
         console.log('click');
     });
-    
+
 })
 let espanol={
     "sProcessing":     "Procesando...",
@@ -105,4 +100,3 @@ let espanol={
         "colvis": "Visibilidad"
     }
 };
-    

@@ -103,7 +103,7 @@ $(document).ready(function(){
                 $('#form-crear-prodcuto').trigger('reset');
             }
             editar=false;
-        })      
+        })
         e.preventDefault();
     });
    function buscar_producto(consulta){
@@ -195,7 +195,7 @@ $(document).ready(function(){
         let stock=$('#stock').val();
         let vencimiento=$('#vencimiento').val();
         funcion='crear_stock';
-        
+
         $.post('../controlador/controlador-lote.php',{funcion,id_producto,proveedor,stock,vencimiento},(response)=>{
             if(response=='crear'){
                 $('#add').hide('slow');
@@ -205,7 +205,7 @@ $(document).ready(function(){
                 buscar_producto();
             }
         })
-        
+
         e.preventDefault();
     });
     $('#form-logo').submit(e=>{
@@ -218,7 +218,6 @@ $(document).ready(function(){
             processData:false,
             comentType:false
         }).done(function(response){
-            //console.log(response);
             const json=JSON.parse(response);
             if (json.alert=='editado') {
                 $('#logo-actual').attr('src',json.ruta);
@@ -231,7 +230,7 @@ $(document).ready(function(){
                 $('#no-update').hide('slow');
                 $('#no-update').show(1000);
                 $('#no-update').hide(2000);
-                $('#form-logo').trigger('reset');    
+                $('#form-logo').trigger('reset');
             }
         })
         e.preventDefault();
@@ -246,7 +245,7 @@ $(document).ready(function(){
         const laboratorio=$(elemento).attr('prodLaboratorio');
         const tipo=$(elemento).attr('prodTipo');
         const presentacion=$(elemento).attr('prodPresentacion');
-        
+
         $('#id_editar_producto').val(id);
         $('#nombre_producto').val(nombre);
         $('#concentracion').val(concentracion);
@@ -263,8 +262,8 @@ $(document).ready(function(){
         const id=$(elemento).attr('prodID');
         const nombre=$(elemento).attr('prodNom');
         const avatar=$(elemento).attr('prodAvatar');
-        
-        
+
+
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
               confirmButton: 'btn btn-success',
@@ -272,7 +271,7 @@ $(document).ready(function(){
             },
             buttonsStyling: false
           })
-          
+
           swalWithBootstrapButtons.fire({
             title: 'Desea eliminar el producto? '+nombre+'',
             text: "No se va a poder revertir!",
@@ -302,7 +301,7 @@ $(document).ready(function(){
                           )
                     }
                 })
-              
+
             } else if(result.dismiss === Swal.DismissReason.cancel){
               swalWithBootstrapButtons.fire(
                 'No se pudo eliminar',
@@ -310,7 +309,7 @@ $(document).ready(function(){
                 'error'
               )
             }
-          })        
+          })
    })
    $(document).on('click','#boton_reporte',(event)=>{
         funcion='reporte';
@@ -321,7 +320,7 @@ $(document).ready(function(){
             mostrarLoader('reporte_pdf');
             //if (response=="") {
                 //cerrarLoader('exito_reporte');
-                window.open('../pdf/pdf-'+funcion+'.pdf','_blank');   
+                window.open('../pdf/pdf-'+funcion+'.pdf','_blank');
             //}//else{
                // cerrarLoader('error_reporte');
            // }
@@ -336,7 +335,7 @@ $(document).ready(function(){
              mostrarLoader('reporte_excel');
             if (response== '') {
                 cerrarLoader('exito_reporte');
-                window.open('../excel/reporte_producto.xlsx','_blank');   
+                window.open('../excel/reporte_producto.xlsx','_blank');
             }else{
                 cerrarLoader('error_reporte');
             }
@@ -383,7 +382,7 @@ $(document).ready(function(){
             break;
 
             default:
-                Swal.close();    
+                Swal.close();
             break;
         }
 
@@ -396,5 +395,5 @@ $(document).ready(function(){
             })
         }
     }
-    
+
 })

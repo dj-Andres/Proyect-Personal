@@ -5,10 +5,10 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3 || $_SESSION['us_tipo']==2
 ?>
   <title>Proyect|Compra</title>
 
-    <?php 
+    <?php
         include_once 'layout/nav.php';
     ?>
-  
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -27,7 +27,7 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3 || $_SESSION['us_tipo']==2
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    
+
     <!--Panel de compra del producto-->
     <section>
     <div class="container-fluid">
@@ -79,7 +79,7 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3 || $_SESSION['us_tipo']==2
                                     </tr>
                                 </thead>
                                 <tbody id="lista-compra" class='table-active'>
-                                    
+
                                 </tbody>
                             </table>
                             <div class="row">
@@ -156,7 +156,7 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3 || $_SESSION['us_tipo']==2
                                             <div class="info-box-content">
                                                 <span class="info-box-text text-left ">INGRESO</span>
                                                 <input type="number" id="pago" min="1" placeholder="Ingresa Dinero" class="form-control">
-                                               
+
                                             </div>
                                         </div>
                                         <div class="info-box mb-3 bg-info">
@@ -187,8 +187,8 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3 || $_SESSION['us_tipo']==2
     </div>
 </section>
 
-    
-    
+
+
   </div>
   <!-- /.content-wrapper -->
 <?php
@@ -198,42 +198,3 @@ include_once 'layout/footer.php';
 }
 ?>
 <script src="../js/carrito.js"></script>
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-<script>
-        ocultar();
-        function ocultar(){
-            $('#paypal-button-container').load(function(){
-                $('#paypal-button-container').hide();
-            });
-        }
-        
-        paypal.Button.render({
-            env:'sandbox',
-            style:{
-                label:'checkout',
-                size:'responsive',
-                shape:'pill',
-                color:'gold'
-            },
-            client:{
-                sandbox:'id'
-            },
-            payment:function(data,actions){
-                return actions.payment.create({
-                    payment:{
-                        transactions:[
-                            {
-                                amount:{total:'100',currency:'USD'}
-                            }
-                        ]
-                    }       
-                });
-            },
-            onAuthorize:function(data,actions){
-                return actions.payment.execute().then(function(){
-                    window.alert('Transacción Completada');
-                });
-            }
-        },'#paypal-button-container');
-    
-</script>

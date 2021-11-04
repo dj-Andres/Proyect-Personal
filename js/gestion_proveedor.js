@@ -107,13 +107,13 @@ $(document).ready(function(){
         const telefono=$(elemento).attr('ProvTelefono');
         const correo=$(elemento).attr('ProvCorreo');
         const direccion=$(elemento).attr('ProvDireccion');
-        
+
         $('#id_editar_proveedor').val(id);
         $('#nombre').val(nombre);
         $('#telefono').val(telefono);
         $('#direccion').val(direccion);
         $('#correo').val(correo);
-        
+
         editar=true;
     });
     $(document).on('click','.avatar',(e)=>{
@@ -129,7 +129,7 @@ $(document).ready(function(){
         $('#funcion').val(funcion);
         $('#avatar').val(avatar);
     });
-    $('form-logo').submit(e=>{
+    $('#form-logo').submit(e=>{
         let formData=new FormData($('#form-logo')[0]);
         $.ajax({
             url:'../controlador/controlador-proveedor.php',

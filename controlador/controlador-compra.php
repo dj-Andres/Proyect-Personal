@@ -7,7 +7,7 @@
     session_start();
     $vendedor=$_SESSION['usuario'];
 
-    if($_POST['funcion']=='registrar_compra'){
+    if($_POST['funcion']=='registar_compra'){
         $total=$_POST['total'];
         $nombre=$_POST['nombre'];
         $cedula=$_POST['cedula'];
@@ -55,7 +55,7 @@
                             $con->exec("DELETE FROM lote  WHERE id_lote=:'$lote->id_lote'");
                             $cantidad=$cantidad-$lote->stock;
                         }
-                        
+
                     }
                 }
                 $subtotal=$prod->cantidad*$prod->precio;
@@ -64,7 +64,6 @@
             }
 
         } catch (Exception $error) {
-            //roll se usa para analuar la transaccion tras un error
             $con->rollBack();
             $venta->borrar($id_venta);
             echo $error->getMessage();

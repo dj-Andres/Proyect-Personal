@@ -57,7 +57,7 @@ $(document).ready(function(){
                 $('#lista').append(template);
                 AgregarLs(producto);
                 contar_productos();
-                
+
         }
     })
     $(document).on('click','.borrar-producto',(e)=>{
@@ -69,17 +69,15 @@ $(document).ready(function(){
         calcular_total();
     })
     $(document).on('click','#vaciar-carrito',(e)=>{
-        // vacia todo los elementos de una fila//
         $('#lista').empty();
         eliminarLS();
-        contar_productos();        
+        contar_productos();
     })
     $(document).on('click','#procesar_pedido',(e)=>{
         procesar_pedido();
     })
     $(document).on('click','#procesar-compra',(e)=>{
         procesar_compra();
-        $('#paypal-button-container').show();
     })
     function recuperarLs(){
         let productos;
@@ -114,7 +112,7 @@ $(document).ready(function(){
                         <td>${json.adicional}</td>
                         <td>${json.precio}</td>
                         <td><button class="borrar-producto btn btn-danger"><i class="fas fa-times-circle"></i></button></td>
-                    </tr>        
+                    </tr>
                 `;
                 $('#lista').append(tempate_carrito);
             })
@@ -127,7 +125,7 @@ $(document).ready(function(){
             if(producto.id===id){
                 productos.splice(indice,1);
             }
-        });      
+        });
         localStorage.setItem('productos',JSON.stringify(productos));
     }
     function eliminarLS(){
@@ -195,7 +193,7 @@ $(document).ready(function(){
             producto.precio=precios[indice].textContent;
         });
         localStorage.setItem('productos',JSON.stringify(productos));
-        calcular_total();    
+        calcular_total();
     })
     $('#cp').keyup((e)=>{
         let id,cantidad,producto,productos,montos,precio;
@@ -244,12 +242,12 @@ $(document).ready(function(){
         nombre=$('#cliente').val();
         cedula=$('#cedula').val();
         total=$("#total").val();
-        
+
         if(recuperarLs().length==0){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'No hay producto,Selccionar alguno!'
+                text: 'No hay producto,Seleccionar alguno!'
             }).then(function(){
                 location.href='../vista/adm_catalogo.php';
             })
@@ -279,7 +277,7 @@ $(document).ready(function(){
                         icon: 'error',
                         title: 'Oops...',
                         text: 'La cantidad solicitada supera al stock del producto!'
-                    })      
+                    })
                 }
             });
         }
@@ -288,7 +286,7 @@ $(document).ready(function(){
         let productos;
         funcion='verificar_stock';
         productos=recuperarLs();
-        
+
         const response= await fetch('../controlador/controlador-producto.php',{
             method :'POST',
             headers:{'Content-Type':'application/x-www-form-urlencoded'},
@@ -302,24 +300,24 @@ $(document).ready(function(){
         let total=$('#total').get(0).textContent;
         let productos=recuperarLs();
         let json=JSON.stringify(productos);
-        
-        
+
+
         $.ajax({
-            data:{"funcion":funcion,"nombre":nombre,"cedula":cedula,"total":total,"json":json},            
+            data:{"funcion":funcion,"nombre":nombre,"cedula":cedula,"total":total,"json":json},
             type:"POST",
             dataType:"json",
             url:"../controlador/controlador-compra.php",
         }).done(function(response){
             console.log(response);
         })
-        
+
     }
 })
 
 
 
-        
-        
+
+
 
 
 

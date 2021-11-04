@@ -70,9 +70,9 @@
         $Id_usuario=$_POST['Id_usuario'];
         $vieja_clave=$_POST['vieja_clave'];
         $nueva_clave=$_POST['nueva_clave'];
-        
+
         $usuario->actualizar_clave($Id_usuario,$vieja_clave,$nueva_clave);
-        
+
     }
     if($_POST['funcion']=='cambiar_foto'){
         if(($_FILES['foto']['type']=='image/jpeg') || ($_FILES['foto']['type']=='image/png') || ($_FILES['foto']['type']=='image/gif')){
@@ -138,7 +138,7 @@
         $clave=$_POST['clave'];
         $tipo=2;
         $avatar='user2-160x160.jpg';
-        $usuario->crear($nombre,$apellido,$nacimiento,$cedula,$clave,$tipo,$avatar);
+        $usuario->crear($cedula,$nombre,$apellido,$nacimiento,$clave,$avatar);
     }
     if($_POST['funcion']=='ascender'){
         $clave=$_POST['clave'];
@@ -184,17 +184,17 @@
         $usuario->reemplazar($codigo,$correo,$cedula);
     }
 
-    function generar($longitud){
+    /*function generar($longitud){
         $key="";
         $patron="1234567890abcdefghijklnñmopqrszws";
         $max=strlen($patron)-1;
 
-        for ($i=0; $i < $longitud ; $i++) { 
+        for ($i=0; $i < $longitud ; $i++) {
             $key.=$patron{mt_rand(0,$max)};
         }
 
         return $key;
 
-    }
-    
+    }*/
+
 ?>
