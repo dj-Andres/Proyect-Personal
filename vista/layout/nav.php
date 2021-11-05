@@ -1,23 +1,13 @@
-  <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!---Estilos del menu de compras--->
   <link rel="stylesheet" href="../css/main.css">
-  <!---Estilos del pagima de compras--->
   <link rel="stylesheet" href="../css/datatables.css">
-    <!---Estilos del graficos--->
-    <link rel="stylesheet" href="../css/Chart.min.css">
-  <!---Estilos del pagima de compras--->
+  <link rel="stylesheet" href="../css/Chart.min.css">
   <link rel="stylesheet" href="../css/compra.css">
   <link rel="shortcut icon" href="../img/LogoSample_ByTailorBrands.ico" type="image/x-icon">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="../css/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
   <link rel="stylesheet" href="../css/adminlte.min.css">
-  <!---sweetaler2---->
   <link rel="stylesheet" href="../css/sweetalert2.css">
-  <!---selecet2---->
   <link rel="stylesheet" href="../css/select2.css">
-  <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -32,9 +22,6 @@
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="adm_catalogo.php" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
       </li>
       <li class="nav-item dropdown" id="cat-carrito" style="display: none;">
         <img  src="../img/carrito.png" class="imagen-carrito nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,7 +53,7 @@
     </ul>
 
     <!-- Right navbar links -->
-    
+
   </nav>
   <!-- /.navbar -->
 
@@ -153,6 +140,15 @@
                   <i class="nav-icon fas fa-truck"></i>
                   <p>
                     Gestión de Proveedores
+                  </p>
+                </a>
+              </li>
+              <li class="nav-header">Configuración</li>
+              <li id="gestion_proveedor" class="nav-item">
+                <a href="adm_empresa.php" class="nav-link">
+                <i class="nav-icon fas fa-briefcase"></i>
+                  <p>
+                    Empresa
                   </p>
                 </a>
               </li>
