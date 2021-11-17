@@ -9,7 +9,7 @@ class Empresa
         $db = new conexion();
         $this->acceso = $db->pdo;
     }
-    function crear($nombre, $ruc, $telefono, $direccion, $email)
+    function crear($nombre, $logo, $ruc, $telefono, $direccion, $email)
     {
         $sql = "SELECT nombre FROM empresa  WHERE nombre=:nombre";
         $query = $this->acceso->prepare($sql);
@@ -18,9 +18,9 @@ class Empresa
         if (!empty($this->objetos)) {
             echo 'nocrear';
         } else {
-            $sql = "INSERT INTO empresa(nombre,ruc,telefono,direccion,email) VALUES(:nombre,:ruc,:telefono,:direccion,:email)";
+            $sql = "INSERT INTO empresa(nombre,logo,ruc,telefono,direccion,email) VALUES(:nombre,:logo,:ruc,:telefono,:direccion,:email)";
             $query = $this->acceso->prepare($sql);
-            $query->execute([':nombre' => $nombre, ':ruc' => $ruc, ':telefono' => $telefono, ':direccion' => $direccion, ':email' => $email]);
+            $query->execute([':nombre' => $nombre, ':logo' => $logo, ':ruc' => $ruc, ':telefono' => $telefono, ':direccion' => $direccion, ':email' => $email]);
             echo 'crear';
         }
     }
@@ -44,5 +44,12 @@ class Empresa
         $query->execute(array(':Id' => $id_editado, ':nombre' => $nombre));
         $this->objetos = $query->rowcount();
         echo 'editado';
+    }
+    function search(){
+        $sql="SELECT * FROM empresa  WHERE nombre NOT LIKE ''ORDER BY id LIMIT 15";
+        $query=$this->acceso->prepare($sql);
+        $query->execute();
+        $this->objetos=$query->fetchall();
+        return $this->objetos;
     }
 }

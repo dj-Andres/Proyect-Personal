@@ -2,7 +2,6 @@ $(document).ready(function(){
     var funcion;
     var editar=false;
     buscar_producto();
-    //uso de la libreria select2//
     $('.select2').select2();
     rellenar_laboratorios();
     rellenar_tipos();

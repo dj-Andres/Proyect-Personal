@@ -3,7 +3,7 @@ session_start();
 if($_SESSION['us_tipo']==3){
     include_once 'layout/header.php';
 ?>
-  <title>Proyect|Configuración Empresa</title>
+  <title>Pharmacy System | Configuración Empresa</title>
 
     <?php
         include_once 'layout/nav.php';

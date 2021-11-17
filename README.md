@@ -1,10 +1,10 @@
-# Proyect-Personal
-Es un proyecto de gestión de usuarios, inventarios y ventas realizadas con patrón MVC en php, my sql, css, html, 
+# Pharmacy System
+Es un proyecto de gestión de usuarios, inventarios y ventas realizadas con patrón MVC en php, my sql, css, html,
 Elaborado con la plantilla AdminLT
 
 
 ## Modulo de Usuarios
-En este modulo se crea,edita y elimina a los usuarios en mismo que el usuario más alto es root el cual podra ascender o descender a los demás usuarios 
+En este modulo se crea,edita y elimina a los usuarios en mismo que el usuario más alto es root el cual podra ascender o descender a los demás usuarios
 
 ![item1](https://user-images.githubusercontent.com/62443346/90937731-07fc5680-e3cd-11ea-9b7b-22a0f4f69558.png)
 

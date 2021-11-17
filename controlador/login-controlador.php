@@ -10,11 +10,11 @@
             case '1':
                 header('Location:../vista/adm_catalogo.php');
                 break;
-            
+
                 case '2':
                     header('Location:../vista/adm_catalogo.php');
                 break;
-                
+
                 case '3':
                     header('Location:../vista/adm_catalogo.php');
                 break;
@@ -23,9 +23,10 @@
         $model_usuario->login($usuario,$clave);
         if(!empty($model_usuario->objetos)){
             foreach ($model_usuario->objetos as $objeto) {
-                
+
                 $_SESSION['us_tipo']=$objeto->us_tipo;
                 $_SESSION['nombre']=$objeto->nombre;
+                $_SESSION['apellido']=$objeto->apellido;
                 $_SESSION['cedula']=$objeto->cedula;
                 $_SESSION['usuario']=$objeto->id_usuario;
             }
@@ -33,11 +34,11 @@
                 case '1':
                     header('Location:../vista/adm_catalogo.php');
                     break;
-                
+
                     case '2':
                         header('Location:../vista/adm_catalogo.php');
                     break;
-                    
+
                     case '3':
                         header('Location:../vista/adm_catalogo.php');
                     break;

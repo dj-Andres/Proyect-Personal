@@ -63,7 +63,7 @@
     <a href="../adm_catalogo.php" class="brand-link">
       <img src="../img/LogoSample_ByTailorBrands.jpg" alt="Dj-Andres" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Proyect</span>
+      <span class="brand-text font-weight-light">Pharmacy System</span>
     </a>
 
     <!-- Sidebar -->
@@ -74,7 +74,7 @@
           <img id="avatar4" src="../img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo $_SESSION['nombre'] ?></a>
+          <a href="#" class="d-block"><?php echo $_SESSION['nombre'].' '.$_SESSION['apellido'] ?></a>
         </div>
       </div>
 
