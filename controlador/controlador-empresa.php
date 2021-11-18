@@ -28,6 +28,6 @@
                 'email' => $objeto->email
             ];
         }
-        $jsonsting=json_encode($json);
+        $jsonsting=json_encode($json[0]);
         echo $jsonsting;
  }

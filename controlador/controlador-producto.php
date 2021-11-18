@@ -141,32 +141,33 @@ if ($_POST['funcion'] == 'verificar_stock') {
 if ($_POST['funcion'] == 'reporte') {
     date_default_timezone_set('America/Guayaquil');
     $fecha = date('Y-m-d H:i:s');
-
     $html = '
-        <header>
-            <div>
-                <img src="../img/LogoSample_ByTailorBrands.jpg" width="90" height="90" style:"text-align:center;">
-            </div>
-            <h1 style="text-align:center;">Reportes de Productos</h1>
-            <div>
+        <header class="clearfix">
+            <h1>Reporte de Productos</h1>
+            <div id="company" class="clearfix">
+                <div>SofaCount SA</div>
+                <div>Machala</div>
+                <div>0992294343</div>
                 <div>
-                    <span>Fecha y Hora</span>' . $fecha . '
+                    <a href="mailto:sofacount@info.com">sofacount@info.com</a>
                 </div>
             </div>
+            <div id="project">
+                <div><span>Fecha </span> ' . $fecha . '</div>
+            </div>
         </header>
-        <br>
-        <table class="table">
+        <table>
                         <thead>
                             <tr>
-                                <th scope="col">N°</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Concentración</th>
-                                <th scope="col">Adicional</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Stock</th>
-                                <th scope="col">Tipo</th>
-                                <th scope="col">Presentación</th>
-                                <th scope="col">Laboratorio</th>
+                                <th>N°</th>
+                                <th class="service">Nombre</th>
+                                <th class="service">Concentración</th>
+                                <th class="desc">Adicional</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th class="desc">Tipo</th>
+                                <th class="desc">Presentación</th>
+                                <th class="desc">Laboratorio</th>
                             </tr>
                         </thead>
                         <tbody>';
@@ -183,42 +184,68 @@ if ($_POST['funcion'] == 'reporte') {
         $html .= '
 
                         <tr>
-                            <th scope="row">' . $contador . '</th>
-                            <td>' . $objeto->nombre . '</td>
-                            <td>' . $objeto->concentracion . '</td>
-                            <td>' . $objeto->adicional . '</td>
-                            <td>' . $objeto->precio . '</td>
-                            <td>' . $total . '</td>
-                            <td>' . $objeto->tipo . '</td>
-                            <td>' . $objeto->presentacion . '</td>
-                            <td>' . $objeto->laboratorio . '</td>
+                            <th>' . $contador . '</th>
+                            <td class="service">' . $objeto->nombre . '</td>
+                            <td class="service">' . $objeto->concentracion . '</td>
+                            <td class="desc">' . $objeto->adicional . '</td>
+                            <td class="unit">' . $objeto->precio . '</td>
+                            <td class="qty">' . $total . '</td>
+                            <td class="desc">' . $objeto->tipo . '</td>
+                            <td class="desc">' . $objeto->presentacion . '</td>
+                            <td class="desc">' . $objeto->laboratorio . '</td>
                         </tr>';
     }
     $html .= '</tbody>
-        </table>';
+        </table>
+        <div id="notices">
+        <div>NOTICE:</div>
+        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+      </div>
+    </main>
+    <footer>
+      La información presentada se basa a los productos almacenados en la empresa.
+    </footer>
+        ';
     $mpdf = new \Mpdf\Mpdf();
-    //$css=file_get_contents("../css/bootstrap.min.css");
-    //$mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
+    $css = file_get_contents("../css/reporte.css");
+    $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
     $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
     $mpdf->Output("../pdf/pdf-" . $_POST['funcion'] . ".pdf", "F");
 }
 if ($_POST['funcion'] == 'reporte_excel') {
+    date_default_timezone_set('America/Guayaquil');
+    $fecha = date('Y-m-d H:i:s');
 
     $producto->reporte_producto();
 
-    $row = 2;
+    $row = 4;
 
     $documento = new Spreadsheet();
 
-    $excel = $documento->getActiveSheet();
+    $documento->getProperties()
+        ->setCreator('Pharmacy System')
+        ->setTitle('Reporte de Productos');
 
-    $excel->setCellValue('A1', 'Nombre');
-    $excel->setCellValue('B1', 'Concentracion');
-    $excel->setCellValue('C1', 'Adicional');
-    $excel->setCellValue('D1', 'Precio');
-    $excel->setCellValue('E1', 'Tipo');
-    $excel->setCellValue('F1', 'Presentacion');
-    $excel->setCellValue('G1', 'Laboratorio');
+    $documento->setActiveSheetIndex(0);
+    $excel = $documento->getActiveSheet()
+        ->setTitle('Reporte Productos')
+        ->mergeCells('A1:C1')
+        ->mergeCells('D1:F1')
+        ->setCellValue('A1', 'Reporte de Ventas')
+        ->setCellValue('D1', 'Fecha  ' . $fecha);
+
+    $excel->getStyle('A1:D1')->getFont()->setBold(true)->setSize(12);
+
+    $excel = $documento->getActiveSheet()
+        ->setCellValue('A3', 'Nombre')
+        ->setCellValue('B3', 'Concentración')
+        ->setCellValue('C3', 'Adicional')
+        ->setCellValue('D3', 'Precio')
+        ->setCellValue('E3', 'Tipo')
+        ->setCellValue('F3', 'Presentacion')
+        ->setCellValue('G3', 'Laboratorio');
+
+    $excel->getStyle('A3:G3')->getFont()->setBold(true)->setSize(12);
 
     foreach ($producto->objetos as $objeto) {
         $excel->setCellValue('A' . $row, $objeto->nombre);
@@ -231,6 +258,14 @@ if ($_POST['funcion'] == 'reporte_excel') {
 
         $row++;
     }
+
+    $excel->getStyle('A' . $row . '')->getAlignment()->setHorizontal('center');
+    $excel->getStyle('B' . $row . '')->getAlignment()->setHorizontal('center');
+    $excel->getStyle('C' . $row . '')->getAlignment()->setHorizontal('center');
+    $excel->getStyle('D' . $row . '')->getAlignment()->setHorizontal('center');
+    $excel->getStyle('E' . $row . '')->getAlignment()->setHorizontal('center');
+    $excel->getStyle('F' . $row . '')->getAlignment()->setHorizontal('center');
+    $excel->getStyle('G' . $row . '')->getAlignment()->setHorizontal('center');
 
     $nombreDelDocumento = "reporte_productos.xlsx";
 

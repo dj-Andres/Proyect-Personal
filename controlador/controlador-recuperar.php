@@ -19,7 +19,7 @@
 
         $usuario->recuperar_clave($cedula,$correo);
     }
-    
+
     if($_POST['funcion']=='generar') {
         $cedula=$_POST['cedula'];
         $correo=$_POST['correo'];
@@ -40,7 +40,7 @@
             $mail->Password   = '619andres';                               // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
             $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-        
+
             //Recipients
             $mail->setFrom('diego96jimenez@outlook.com', 'Sistema Administrativo');
             $mail->addAddress($correo);     // Add a recipient
@@ -48,11 +48,11 @@
             //$mail->addReplyTo('info@example.com', 'Information');
             //$mail->addCC('cc@example.com');
             //$mail->addBCC('bcc@example.com');
-        
+
             // Attachments
             //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
             //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-        
+
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Restablecer contraseña';
@@ -72,10 +72,6 @@
         $key="";
         $patron="1234567890abcdefghijklnñmopqrszws";
         $max=strlen($patron)-1;
-
-        /*for($i=0;$i < $longitud;$i++){
-            $key .= $patron{mt_rand(0,$max)};  
-        } */
         for($i=0;$i < $longitud;$i++)
         {
             $key.=$patron[rand(0,$max)];
@@ -83,6 +79,3 @@
         return $key;
 
     }
-    
-
-?>
