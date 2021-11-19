@@ -3,7 +3,6 @@ $(document).ready(function(){
     function mostrar_consultas(){
         let funcion='mostrar_consultas';
         $.post('../controlador/controlador-venta.php',{funcion},(response)=>{
-            console.log(response);
             const vistas=JSON.parse(response);
             $('#venta_dia_vendedor').html(vistas.venta_dia_vendedor);
             $('#venta_diaria').html(vistas.venta_diaria);
@@ -68,7 +67,16 @@ $(document).ready(function(){
         })
     })
     $('#tabla_venta tbody').on('click','.pdf',function(){
-        console.log('click');
+        let funcion='reporte-venta';
+        let datos=datatable.row($(this).parents()).data();
+        let id=datos.id_venta;
+
+        $.post('../controlador/controlador-venta-producto.php',{funcion,id},(response)=>{
+            if (response =='') {
+                window.open('../pdf/pdf-'+funcion+'.pdf','_blank');
+            }
+        });
+
     });
 
 })

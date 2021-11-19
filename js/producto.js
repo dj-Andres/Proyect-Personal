@@ -312,23 +312,20 @@ $(document).ready(function(){
    })
    $(document).on('click','#boton_reporte',(event)=>{
         funcion='reporte';
-        console.log(funcion);
         mostrarLoader('reporte_pdf');
         $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
-            console.log(response);
             mostrarLoader('reporte_pdf');
-            //if (response=="") {
-                //cerrarLoader('exito_reporte');
+            if (response=="") {
+                cerrarLoader('exito_reporte');
                 window.open('../pdf/pdf-'+funcion+'.pdf','_blank');
-            //}//else{
-               // cerrarLoader('error_reporte');
-           // }
+            }else{
+               cerrarLoader('error_reporte');
+           }
         })
 
     })
     $(document).on('click','#reporte_excel',(event)=>{
         funcion='reporte_excel';
-        console.log(funcion);
         $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
             console.log(response);
              mostrarLoader('reporte_excel');
