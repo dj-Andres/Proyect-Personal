@@ -1,8 +1,8 @@
 <?php
 
- define("servidor","localhost");
- define("usuario","root");
- define("clave","");
- define("db","farmacia");
- define("puerto","3306");
+ define("APP_SERVER","localhost");
+ define("USER","root");
+ define("PASSWORD","");
+ define("DATABASE","farmacia");
+ define("PORT","3306");
 

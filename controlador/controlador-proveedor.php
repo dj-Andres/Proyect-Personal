@@ -41,8 +41,6 @@
         $avatar=$_POST['avatar'];
         if(($_FILES['foto']['type']=='image/jpeg') || ($_FILES['foto']['type']=='image/png') || ($_FILES['foto']['type']=='image/gif')){
             $nombre_foto=uniqid().'-'.$_FILES['foto']['name'];
-            //echo $nombre_foto;
-            //creamos una ruta//
             $ruta='../img/proveedor/'.$nombre_foto;
             move_uploaded_file($_FILES['foto']['tmp_name'],$ruta);
             $proveedor->cambiar_logo($id,$nombre_foto);
@@ -67,10 +65,10 @@
             echo $jsonstring;
           }
     }
-    //if($_POST['funcion']=='borrar'){
-    //    $id=$_POST['id'];
-     //   $proveedor->eliminar($id);
-    //}
+    if($_POST['funcion']=='borrar'){
+       $id=$_POST['id'];
+       $proveedor->eliminar($id);
+    }
     if($_POST['funcion']=='rellenar_proveedor'){
         $proveedor->rellenar_proveedor();
         $json=array();

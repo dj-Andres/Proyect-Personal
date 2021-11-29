@@ -3,9 +3,9 @@ session_start();
 if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
     include_once 'layout/header.php';
 ?>
-  <title>Proyect|Gestión Proveedor</title>
+  <title>Pharmacy System|Gestión Proveedor</title>
 
-    <?php 
+    <?php
         include_once 'layout/nav.php';
     ?>
 
@@ -77,7 +77,7 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
             </div>
             <div class="text-center">
                 <b id="nombre_logo">
-                    
+
                 </b>
             </div>
             <!--Alertas de contraseña-->
@@ -90,9 +90,9 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
             <form id="form-logo" enctype="multipart/form-data">
                 <div class="input-group mb-3 ml-5 mt-2">
                     <input type="file"  class="input-group" name="foto">
-                    <input type="hidden" name="funcion" id="funcion">
-                    <input type="hidden" name="id_logo_prov" id="id_logo_prov">
-                    <input type="hidden" name="avatar" id="avatar">
+                    <input type="text" name="funcion" id="funcion">
+                    <input type="text" name="id_logo_prov" id="id_logo_prov">
+                    <input type="text" name="avatar" id="avatar">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
@@ -104,7 +104,7 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
     </div>
     </div>
     <!---final de modal de cambio de avatar--->
-    
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

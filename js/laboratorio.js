@@ -1,19 +1,16 @@
 $(document).ready(function(){
     buscar_laboratorio();
     var funcion;
-    var editar=false;    
+    var editar=false;
     $('#form-crear-laboratorio').submit(e=>{
         let nombre_laboratorio=$('#nombre-laboratorio').val();
         let id_editado=$('#id_editar_lab').val();
-        //console.log(id_editado);
         if(editar==false){
             funcion='crear';
         }else{
             funcion='actualizar';
         }
-        //funcion ajax estilo post//
         $.post('../controlador/controlador-laboratorio.php',{nombre_laboratorio,id_editado,funcion},(response)=>{
-            //console.log(response);
             if(response=='crear'){
                 $('#crear-laboratorio').hide('slow');
                 $('#crear-laboratorio').show(1000);
@@ -41,7 +38,6 @@ $(document).ready(function(){
    function buscar_laboratorio(consulta){
         funcion='buscar';
         $.post('../controlador/controlador-laboratorio.php',{funcion,consulta},(response)=>{
-            //console.log(response);
             const laboratorios=JSON.parse(response);
             let template='';
             laboratorios.forEach(laboratorio => {
@@ -69,7 +65,7 @@ $(document).ready(function(){
             });
             $('#laboratorios').html(template);
         })
-   }  
+   }
    $(document).on('keyup','#buscar-laboratorio',function(){
         let valor=$(this).val();
         if(valor!=''){
@@ -81,14 +77,13 @@ $(document).ready(function(){
     $(document).on('click','.avatar',(e)=>{
         funcion="cambiar_logo";
         const elemento=$(this)[0].activeElement.parentElement.parentElement;
-        //console.log(elemento);
-        const id=$(elemento).attr('labId'); 
-        const nombre=$(elemento).attr('labNom'); ; 
+        const id=$(elemento).attr('labId');
+        const nombre=$(elemento).attr('labNom'); ;
         const avatar=$(elemento).attr('labAvatar');
-        //console.log(id + nombre + avatar);
+
         $('#logo-actual').attr('src',avatar);
         $('#nombre_logo').html(nombre);
-        $('#funcion').val(funcion);  
+        $('#funcion').val(funcion);
         $('#id_logo-lab').val(id);
    })
    $('#form-logo').submit(e=>{
@@ -114,7 +109,7 @@ $(document).ready(function(){
                 $('#no-update').hide('slow');
                 $('#no-update').show(1000);
                 $('#no-update').hide(2000);
-                $('#form-logo').trigger('reset');    
+                $('#form-logo').trigger('reset');
             }
         });
         e.preventDefault();
@@ -123,11 +118,11 @@ $(document).ready(function(){
         funcion="borrar";
         const elemento=$(this)[0].activeElement.parentElement.parentElement;
         //console.log(elemento);
-        const id=$(elemento).attr('labId'); 
-        const nombre=$(elemento).attr('labNom'); ; 
+        const id=$(elemento).attr('labId');
+        const nombre=$(elemento).attr('labNom'); ;
         const avatar=$(elemento).attr('labAvatar');
         //console.log(id + nombre + avatar);
-        
+
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
               confirmButton: 'btn btn-success',
@@ -135,7 +130,7 @@ $(document).ready(function(){
             },
             buttonsStyling: false
           })
-          
+
           swalWithBootstrapButtons.fire({
             title: 'Desea eliminar el laboratorio? '+nombre+'',
             text: "No se va a poder revertir!",
@@ -166,7 +161,7 @@ $(document).ready(function(){
                           )
                     }
                 })
-              
+
             } else if(result.dismiss === Swal.DismissReason.cancel){
               swalWithBootstrapButtons.fire(
                 'No se pudo eliminar',
@@ -174,12 +169,12 @@ $(document).ready(function(){
                 'error'
               )
             }
-          })        
+          })
    })
    $(document).on('click','.editar',(e)=>{
         const elemento=$(this)[0].activeElement.parentElement.parentElement;
-        const id=$(elemento).attr('labId'); 
-        const nombre=$(elemento).attr('labNom'); ; 
+        const id=$(elemento).attr('labId');
+        const nombre=$(elemento).attr('labNom'); ;
         const avatar=$(elemento).attr('labAvatar');
         $('#id_editar_lab').val(id);
         $('#nombre-laboratorio').val(nombre);

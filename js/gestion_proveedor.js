@@ -14,7 +14,7 @@ $(document).ready(function(){
             funcion='crear';
         }
         $.post('../controlador/controlador-proveedor.php',{id_editado,nombre,telefono,correo,direccion,funcion},(response)=>{
-            //console.log(response);
+
             if(response=='crear'){
                 $('#crear').hide('slow');
                 $('#crear').show(1000);
@@ -129,7 +129,7 @@ $(document).ready(function(){
         $('#funcion').val(funcion);
         $('#avatar').val(avatar);
     });
-    $('#form-logo').submit(e=>{
+    $('#form-logo').submit((e)=>{
         let formData=new FormData($('#form-logo')[0]);
         $.ajax({
             url:'../controlador/controlador-proveedor.php',
@@ -161,8 +161,6 @@ $(document).ready(function(){
         swalWithBootstrapButtons.fire({
             title: 'Desea eliminar el proveedor: '+nombre+'?',
             text: "No se podra revertir la acción!",
-            //icon: 'warning',
-            // añadimos propiedades para mostrar el avatar del laboratorio//
             imageUrl:''+avatar+'',
             imageWidth:100,
             imageHeigth:100,
@@ -172,9 +170,7 @@ $(document).ready(function(){
             reverseButtons: true
           }).then((result) => {
             if (result.value) {
-                //eviamos datos mediante ajax//
                 $.post('../controlador/controlador-proveedor.php',{id,funcion},(response)=>{
-                    //console.log(response);
                     editar==false;
                     if (response=='borrado') {
                             swalWithBootstrapButtons.fire(

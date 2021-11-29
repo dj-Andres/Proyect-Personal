@@ -7,7 +7,7 @@
         public function __construct()
         {
             $db=new conexion();
-            $this->acceso=$db->pdo;    
+            $this->acceso=$db->pdo;
         }
 
         function crear($nombre,$telefono,$correo,$direccion,$avatar){
@@ -45,7 +45,7 @@
         function editar($id,$nombre,$telefono,$correo,$direccion){
             $sql="SELECT id_proveedor FROM proveedor WHERE id_proveedor=:id";
             $query=$this->acceso->prepare($sql);
-            $query->execute(array('id'=>$id));
+            $query->execute(array(':id'=>$id));
             $this->objetos=$query->fetchall();
 
             if(!empty($this->objetos)){
@@ -53,9 +53,21 @@
             }else{
                 $sql="UPDATE proveedor SET nombre=:nombre,telefono=:telefono,correo=:correo,:direccion=:direccion WHERE id_producto=:id";
                 $query=$this->acceso->prepare($sql);
-                $query->execute(array('id'=>$id,':nombre'=>$nombre,':telefono'=>$telefono,':correo'=>$correo,':direccion'=>$direccion));
+                $query->execute(array(':id'=>$id,':nombre'=>$nombre,':telefono'=>$telefono,':correo'=>$correo,':direccion'=>$direccion));
                 $this->objetos=$query->rowcount();
                 echo 'editado';
+            }
+        }
+        function eliminar($id){
+            $sql="DELETE FROM proveedor WHERE id_proveedor=:Id";
+            $query=$this->acceso->prepare($sql);
+            $query->execute(array(':Id'=>$id));
+            $this->objetos=$query->rowcount();
+
+            if(!empty($this->objetos)){
+                echo 'borrado';
+            }else{
+                echo 'no-borrado';
             }
         }
         function cambiar_logo($id,$nombre_foto){
@@ -67,10 +79,10 @@
             $sql="SELECT * FROM proveedor ORDER BY nombre ASC";
             $query=$this->acceso->prepare($sql);
             $query->execute();
-            $this->objetos=$query->fetchall();          
+            $this->objetos=$query->fetchall();
             return $this->objetos;
-        }  
-        
+        }
+
     }
 
 ?>
