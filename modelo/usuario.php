@@ -165,7 +165,6 @@
         }else{
             echo 'no-encratado';
         }
-
       }
       function reemplazar($codigo,$correo,$cedula){
         $sql="UPDATE usuario set clave=:codigo WHERE correo=:correo AND cedula=:cedula";
