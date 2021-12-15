@@ -7,8 +7,6 @@ require '../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-
-
 $producto = new producto();
 $venta = new ventas();
 $venta_Producto = new ventaProducto();
@@ -87,9 +85,6 @@ if ($_POST['funcion'] == 'reporte') {
     $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
     $mpdf->Output("../pdf/pdf-" . $_POST['funcion'] . ".pdf", "F");
 }
-
-
-
 if ($_POST['funcion'] == 'reporte_excel') {
     date_default_timezone_set('America/Guayaquil');
     $fecha = date('Y-m-d H:i:s');
@@ -154,7 +149,6 @@ if ($_POST['funcion'] == 'reporte_excel') {
     $writter = new Xlsx($documento);
     $writter->save('../excel/reporte_producto.xlsx');
 }
-
 if ($_POST['funcion'] == 'reporte-venta') {
     $id = $_POST['id'];
 

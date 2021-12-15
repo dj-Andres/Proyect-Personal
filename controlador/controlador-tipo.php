@@ -26,7 +26,7 @@
         $tipo->editar($nombre,$id_editado);
     }
     if($_POST['funcion']=='borrar'){
-        $id=$_POST['id'];            
+        $id=$_POST['id'];
         $tipo->borrar($id);
     }
     if($_POST['funcion']=='rellenar_tipos'){
@@ -41,4 +41,3 @@
         $jsonsting=json_encode($json);
         echo $jsonsting;
     }
-?>

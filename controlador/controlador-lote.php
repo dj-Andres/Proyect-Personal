@@ -47,7 +47,7 @@
                     'dia'=>$dia,
                     'estado'=>$estado,
                     'invert'=>$verificado
-                );   
+                );
             }
             $jsonsting=json_encode($json);
             echo $jsonsting;
@@ -61,4 +61,3 @@
             $id_lote=$_POST['id'];
             $lote->borrar($id_lote);
         }
-?>
