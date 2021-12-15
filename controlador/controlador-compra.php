@@ -1,6 +1,9 @@
 <?php
 include '../modelo/venta.php';
 include_once '../modelo/conexion.php';
+require '../vendor/autoload.php';
+
+use Twilio\Rest\Client;
 
 $venta = new ventas();
 
@@ -63,10 +66,24 @@ if ($_POST['funcion'] == 'registar_compra') {
             $subtotal = $prod->cantidad * $prod->precio;
             $conexion->exec("INSERT INTO venta_producto(cantidad,precio,subtotal,producto_Id_producto,venta_Id_venta)VALUES('$prod->cantidad','$prod->precio','$subtotal','$prod->id','$id_venta')");
             $conexion->commit();
+            sendSMS($nombre, $fecha, $subtotal);
         }
     } catch (Exception $error) {
         $conexion->rollBack();
         $venta->borrar($id_venta);
         echo $error->getMessage();
     }
+}
+
+function sendSMS(string $name, string $date, float $total)
+{
+    $account_sid = "ACe2e3efc92c8272119799e9dec36d0e67";
+    $auth_token = "dfcbe2db24c1e7e69d40bae399d799c5";
+    $twilio_number = "+12182506139";
+
+    $client = new Client($account_sid, $auth_token);
+    $client->messages->create('+593992294342', [
+        'from' => $twilio_number,
+        'body' => $name . ' ha realizado una compra con la fecha ' . $date . ' y tuvo un total de pagar de ' . $total . 'Gracias por su compra esperamos su pronto regreso'
+    ]);
 }

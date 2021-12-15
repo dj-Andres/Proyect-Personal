@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'aefe4dd3c80e638492265532af39e331dcde19ca',
+    'reference' => '0d15b0aa846f11548bdf699f4f0af502fde5ce53',
     'name' => '__root__',
   ),
   'versions' => 
@@ -41,7 +41,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'aefe4dd3c80e638492265532af39e331dcde19ca',
+      'reference' => '0d15b0aa846f11548bdf699f4f0af502fde5ce53',
     ),
     'ezyang/htmlpurifier' => 
     array (
@@ -121,12 +121,12 @@ private static $installed = array (
     ),
     'phpmailer/phpmailer' => 
     array (
-      'pretty_version' => 'v6.2.0',
-      'version' => '6.2.0.0',
+      'pretty_version' => 'v6.5.0',
+      'version' => '6.5.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e38888a75c070304ca5514197d4847a59a5c853f',
+      'reference' => 'a5b5c43e50b7fba655f793ad27303cd74c57363c',
     ),
     'phpoffice/phpspreadsheet' => 
     array (
@@ -199,6 +199,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'f377a3dd1fde44d37b9831d68dc8dea3ffd28e13',
+    ),
+    'twilio/sdk' => 
+    array (
+      'pretty_version' => '6.31.2',
+      'version' => '6.31.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'be59275f0fc311cb45d5303d47bffaa06a19d6e5',
     ),
   ),
 );
