@@ -33,7 +33,7 @@
                 $this->objetos=$query->fetchall();
                 return $this->objetos;
             }else{
-                $sql="SELECT id_producto,productos.nombre as nombre,concentracion,adicional,precio,productos.avatar as avatar,tipo_producto.nombre_tipo as tipo,presentacion.presentacion as presentacion ,laboratorio.nombre as laboratorio,id_laboratorio,id_tipo_producto,id_presentacion FROM productos JOIN laboratorio ON prod_lab=id_laboratorio JOIN tipo_producto ON  prod_tip_prod=id_tipo_producto JOIN presentacion ON  prod_present=id_presentacion WHERE productos.nombre NOT LIKE ''ORDER BY id_producto LIMIT 25";
+                $sql="SELECT id_producto,productos.nombre as nombre,concentracion,adicional,precio,productos.avatar as avatar,tipo_producto.nombre_tipo as tipo,presentacion.presentacion as presentacion ,laboratorio.nombre as laboratorio,id_laboratorio,id_tipo_producto,id_presentacion FROM productos JOIN laboratorio ON prod_lab=id_laboratorio JOIN tipo_producto ON  prod_tip_prod=id_tipo_producto JOIN presentacion ON  prod_present=id_presentacion WHERE productos.nombre NOT LIKE ''ORDER BY id_producto LIMIT 15";
                 $query=$this->acceso->prepare($sql);
                 $query->execute();
                 $this->objetos=$query->fetchall();
@@ -67,14 +67,14 @@
             $sql="UPDATE productos SET avatar=:avatar WHERE id_producto=:Id";
             $query=$this->acceso->prepare($sql);
             $query->execute(array(':Id'=>$id,':avatar'=>$nombre_foto));
-                
+
         }
         function borrar($id){
             $sql="DELETE FROM productos WHERE id_producto=:Id";
             $query=$this->acceso->prepare($sql);
             $query->execute(array(':Id'=>$id));
             $this->objetos=$query->rowcount();
-           
+
             if(!empty($this->objetos)){
                 echo 'borrado';
             }else{

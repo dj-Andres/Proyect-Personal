@@ -77,9 +77,9 @@ if ($_POST['funcion'] == 'registar_compra') {
 
 function sendSMS(string $name, string $date, float $total)
 {
-    $account_sid = "ACe2e3efc92c8272119799e9dec36d0e67";
-    $auth_token = "dfcbe2db24c1e7e69d40bae399d799c5";
-    $twilio_number = "+12182506139";
+    $account_sid = "XXXXXXXXX";
+    $auth_token = "XXXXXXXXXXXXXX";
+    $twilio_number = "XXXXXXXXXX";
 
     $client = new Client($account_sid, $auth_token);
     $client->messages->create('+593992294342', [

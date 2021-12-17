@@ -4,6 +4,7 @@
         "ext-gd": "*",
         "phpoffice/phpspreadsheet": "^1.16",
         "mpdf/mpdf": "^8.0",
-        "twilio/sdk": "^6.31"
+        "twilio/sdk": "^6.31",
+        "vlucas/phpdotenv": "^4.2"
     }
 }

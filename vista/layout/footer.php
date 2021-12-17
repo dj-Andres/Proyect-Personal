@@ -13,6 +13,7 @@
 <script src="../js/demo.js"></script>
 <script src="../js/sweetalert2.js"></script>
 <script src="../js/select2.js"></script>
+<script src="../js/toastr.min.js"></script>
 <script>
   let funcion='devolver_avatar';
   $.post('../controlador/usuario-controlador.php',{funcion},(response)=>{

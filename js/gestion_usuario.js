@@ -1,6 +1,9 @@
+import {onlyLetters,onlyNumbers} from "./custom.js";
 $(document).ready(function(){
+    onlyLetters();
+    onlyNumbers();
     var tipo_usuario=$('#tipo_usuario').val();
-    //console.log(tipo_usuario);
+
     if(tipo_usuario==2){
         $('#boton-crear').hide();
     }
@@ -51,7 +54,7 @@ $(document).ready(function(){
                                     templete+=`
                                         <button class="borrar-usuario btn btn-danger ml-1" type="button" data-toggle="modal" data-target="#confirmar">
                                             <i class="far fa-window-close mr-1"></i>Eliminar
-                                        </button>       
+                                        </button>
                                     `;
                                 }
                                 if(usuario.tipo_usuario==2){
@@ -74,8 +77,8 @@ $(document).ready(function(){
                                     templete+=`
                                         <button class="borrar-usuario btn btn-danger ml-1" type="button" data-toggle="modal" data-target="#confirmar">
                                             <i class="far fa-window-close mr-1"></i>Eliminar
-                                        </button>       
-                                    `;         
+                                        </button>
+                                    `;
                                 }
                             }
                             templete+=`
@@ -102,7 +105,6 @@ $(document).ready(function(){
         let nacimiento=$('#nacimiento').val();
         let cedula=$('#cedula').val();
         let clave=$('#clave').val();
-        //console.log(nombre + apellido  + cedula + clave);
         funcion='crear_usuario';
         $.post('../controlador/usuario-controlador.php',{nombre,apellido,nacimiento,cedula,clave,funcion},(response)=>{
             console.log(response);
@@ -123,9 +125,7 @@ $(document).ready(function(){
     });
     $(document).on('click','.ascender',(e)=>{
         const elemento=$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
-        //console.log(elemento);
         const id=$(elemento).attr('usuarioid');
-        console.log(id);
         funcion='ascender';
         $('#Id_usuario').val(id);
         $('#funcion').val(funcion);
@@ -153,7 +153,6 @@ $(document).ready(function(){
         let Id_usuario=$('#Id_usuario').val();
         funcion=$('#funcion').val();
         $.post('../controlador/usuario-controlador.php',{clave,Id_usuario,funcion},(response)=>{
-            //console.log(response);
             if(response=='ascendido' || response=='descendido' || response=='borrado'){
                 $('#confirmado').hide('slow');
                 $('#confirmado').show(1000);
@@ -168,5 +167,5 @@ $(document).ready(function(){
             buscar_datos();
         });
         e.preventDefault();
-    }); 
+    });
 })
