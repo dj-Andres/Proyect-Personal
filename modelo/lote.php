@@ -1,7 +1,8 @@
 <?php
     include_once 'conexion.php';
+    require 'baseModel.php';
 
-    class lote{
+    class lote  extends baseModel{
         var $objetos;
         public function __construct()
         {
@@ -9,9 +10,7 @@
             $this->acceso=$db->pdo;
         }
         function crear($id_producto,$proveedor,$stock,$vencimiento){
-            $sql="INSERT INTO lote(stock,vencimiento,lote_Id_prod,lote_Id_prov) VALUES(:stock,:vencimiento,:producto,:proveedor)";
-            $query=$this->acceso->prepare($sql);
-            $query->execute(array(':stock'=>$stock,':vencimiento'=>$vencimiento,':producto'=>$id_producto,':proveedor'=>$proveedor));
+            $this->insert('lote',['stock'=>$stock,'vencimiento'=>$vencimiento,'lote_Id_prod'=>$id_producto,'lote_Id_prov'=>$proveedor]);
             echo 'crear';
         }
         function buscar(){
