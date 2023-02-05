@@ -6,7 +6,7 @@ $(document).ready(function(){
     $(document).on('click','.agregar-carrito',(e)=>{
         const elemento=$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
         const id=$(elemento).attr('prodID');
-        //const nombre=$(elemento).attr('prodNom');
+        const nombre=$(elemento).attr('prodNom');
         const concentracion=$(elemento).attr('prodConcentracion');
         const adicional=$(elemento).attr('prodAdicional');
         const precio=$(elemento).attr('prodPrecio');
@@ -18,7 +18,7 @@ $(document).ready(function(){
 
         const producto={
             id:id,
-            //nombre:nombre,
+            nombre:nombre,
             concentracion:concentracion,
             adicional:adicional,
             precio:precio,
@@ -29,6 +29,7 @@ $(document).ready(function(){
             stock:stock,
             cantidad:1
         }
+
         let id_producto;
         let productos;
         productos=recuperarLs();
@@ -57,7 +58,6 @@ $(document).ready(function(){
                 $('#lista').append(template);
                 AgregarLs(producto);
                 contar_productos();
-
         }
     })
     $(document).on('click','.borrar-producto',(e)=>{

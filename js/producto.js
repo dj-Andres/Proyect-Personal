@@ -313,7 +313,7 @@ $(document).ready(function(){
    $(document).on('click','#boton_reporte',(event)=>{
         funcion='reporte';
         mostrarLoader('reporte_pdf');
-        $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
+        $.post('../controlador/controlador-reporte.php',{funcion},(response)=>{
             mostrarLoader('reporte_pdf');
             if (response=="") {
                 cerrarLoader('exito_reporte');
@@ -326,7 +326,7 @@ $(document).ready(function(){
     })
     $(document).on('click','#reporte_excel',(event)=>{
         funcion='reporte_excel';
-        $.post('../controlador/controlador-producto.php',{funcion},(response)=>{
+        $.post('../controlador/controlador-reporte.php',{funcion},(response)=>{
             console.log(response);
              mostrarLoader('reporte_excel');
             if (response== '') {

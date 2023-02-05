@@ -7,26 +7,26 @@
         $db=new conexion();
         $this->acceso=$db->pdo;
       }
-      function crear($nombre,$avatar){
+      public function crear(string $nombre,string $avatar){
             $sql="SELECT id_laboratorio FROM laboratorio  WHERE nombre=:nombre";
             $query=$this->acceso->prepare($sql);
-            $query->execute(array(':nombre'=>$nombre));
+            $query->execute([':nombre'=>$nombre]);
             $this->objetos=$query->fetchall();
             if(!empty($this->objetos)){
-                echo 'nocrear';                      
+                echo 'nocrear';
             }else{
                 $sql="INSERT INTO laboratorio(nombre,avatar) VALUES(:nombre,:avatar)";
                 $query=$this->acceso->prepare($sql);
-                $query->execute(array(':nombre'=>$nombre,':avatar'=>$avatar));
+                $query->execute([':nombre'=>$nombre,':avatar'=>$avatar]);
                 echo 'crear';
             }
        }
-       function buscar(){
+       public function buscar(){
             if(!empty($_POST['consulta'])){
                 $consulta=$_POST['consulta'];
                 $sql="SELECT * FROM laboratorio  WHERE nombre LIKE :consulta";
                 $query=$this->acceso->prepare($sql);
-                $query->execute(array(':consulta'=>"%$consulta%"));
+                $query->execute([':consulta'=>"%$consulta%"]);
                 $this->objetos=$query->fetchall();
                 return $this->objetos;
             }else{
@@ -37,45 +37,44 @@
                 return $this->objetos;
             }
         }
-        function cambiar_logo($id,$nombre_foto){
+        public function cambiar_logo(int $id,string $nombre_foto){
             $sql="SELECT avatar FROM laboratorio WHERE id_laboratorio=:Id";
             $query=$this->acceso->prepare($sql);
-            $query->execute(array(':Id'=>$id));
+            $query->execute([':Id'=>$id]);
             $this->objetos=$query->fetchall();
-            
+
                 $sql="UPDATE laboratorio SET avatar=:nombre_foto WHERE Id_laboratorio=:Id";
                 $query=$this->acceso->prepare($sql);
-                $query->execute(array(':Id'=>$id,':nombre_foto'=>$nombre_foto));
-                
+                $query->execute([':Id'=>$id,':nombre_foto'=>$nombre_foto]);
+
             return $this->objetos;
-            
-        
+
+
         }
-       function borrar($id){
+       public function borrar(int $id){
             $sql="DELETE FROM laboratorio WHERE id_laboratorio=:Id";
             $query=$this->acceso->prepare($sql);
-            $query->execute(array(':Id'=>$id));
+            $query->execute([':Id'=>$id]);
             $this->objetos=$query->rowcount();
-           
+
             if(!empty($this->objetos)){
                 echo 'borrado';
             }else{
                 echo 'no-borrado';
             }
        }
-       function editar($nombre,$id_editado){
+       public function editar(string $nombre,int $id_editado){
             $sql="UPDATE laboratorio SET nombre=:nombre WHERE id_laboratorio=:Id";
             $query=$this->acceso->prepare($sql);
-            $query->execute(array(':Id'=>$id_editado,':nombre'=>$nombre));
+            $query->execute([':Id'=>$id_editado,':nombre'=>$nombre]);
             $this->objetos=$query->rowcount();
             echo 'editado';
         }
-        function rellenar_laboratorio(){
+        public function rellenar_laboratorio(){
             $sql="SELECT * FROM laboratorio ORDER BY nombre ASC";
             $query=$this->acceso->prepare($sql);
             $query->execute();
-            $this->objetos=$query->fetchall();          
+            $this->objetos=$query->fetchall();
             return $this->objetos;
-        }      
+        }
   }
-?>

@@ -10,38 +10,38 @@
             $db=new conexion();
             $this->acceso=$db->pdo;
         }
-        function crear($nombre){
+        public function crear(string $nombre){
             $sql="SELECT id_presentacion FROM presentacion  WHERE presentacion=:nombre";
             $query=$this->acceso->prepare($sql);
-            $query->execute(array(':nombre'=>$nombre));
+            $query->execute([':nombre'=>$nombre]);
             $this->objetos=$query->fetchall();
             if(!empty($this->objetos)){
-                echo 'nocrear';                      
+                echo 'nocrear';
             }else{
                 $sql="INSERT INTO presentacion(presentacion) VALUES(:nombre)";
                 $query=$this->acceso->prepare($sql);
-                $query->execute(array(':nombre'=>$nombre));
+                $query->execute([':nombre'=>$nombre]);
                 echo 'crear';
             }
        }
-       function borrar($id){
+       public function borrar(int $id){
             $sql="DELETE FROM presentacion WHERE id_presentacion=:Id";
             $query=$this->acceso->prepare($sql);
-            $query->execute(array(':Id'=>$id));
+            $query->execute([':Id'=>$id]);
             $this->objetos=$query->rowcount();
-        
+
             if(!empty($this->objetos)){
                 echo 'borrado';
             }else{
                 echo 'no-borrado';
             }
         }
-       function buscar(){
+       public function buscar(){
             if(!empty($_POST['consulta'])){
                 $consulta=$_POST['consulta'];
                 $sql="SELECT * FROM presentacion  WHERE presentacion LIKE :consulta";
                 $query=$this->acceso->prepare($sql);
-                $query->execute(array(':consulta'=>"%$consulta%"));
+                $query->execute([':consulta'=>"%$consulta%"]);
                 $this->objetos=$query->fetchall();
                 return $this->objetos;
             }else{
@@ -52,19 +52,18 @@
                 return $this->objetos;
             }
         }
-        function editar($nombre,$id_editado){
+        public function editar(string $nombre,int $id_editado){
             $sql="UPDATE presentacion SET presentacion=:nombre WHERE id_presentacion=:Id";
             $query=$this->acceso->prepare($sql);
-            $query->execute(array(':Id'=>$id_editado,':nombre'=>$nombre));
+            $query->execute([':Id'=>$id_editado,':nombre'=>$nombre]);
             $this->objetos=$query->rowcount();
             echo 'editado';
         }
-        function rellenar_presentacion(){
+        public function rellenar_presentacion(){
             $sql="SELECT * FROM presentacion ORDER BY presentacion ASC";
             $query=$this->acceso->prepare($sql);
             $query->execute();
-            $this->objetos=$query->fetchall();          
+            $this->objetos=$query->fetchall();
             return $this->objetos;
-        }      
+        }
     }
-?>
