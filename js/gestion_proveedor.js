@@ -1,5 +1,8 @@
+import {onlyLetters,onlyNumbers} from "./custom.js";
 $(document).ready(function(){
     buscar_proveedor();
+    onlyLetters();
+    onlyNumbers();
     var funcion;
     var editar=false;
     $('#form-crear').submit(e=>{

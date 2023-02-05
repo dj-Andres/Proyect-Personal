@@ -138,7 +138,7 @@
         $clave=$_POST['clave'];
         $tipo=2;
         $avatar='user2-160x160.jpg';
-        $usuario->crear($cedula,$nombre,$apellido,$nacimiento,$clave,$avatar);
+        $usuario->crear($cedula,$nombre,$apellido,$nacimiento,$clave,$avatar,$tipo);
     }
     if($_POST['funcion']=='ascender'){
         $clave=$_POST['clave'];
@@ -196,5 +196,3 @@
         return $key;
 
     }*/
-
-?>

@@ -1,7 +1,7 @@
 <?php
     include '../modelo/venta.php';
     $venta=new ventas();
-    
+
     session_start();
     $id_usuario=$_SESSION['usuario'];
 
@@ -10,7 +10,7 @@
         $venta->buscar();
 
        $json=array();
-        
+
         foreach ($venta->objetos as $objeto) {
             $json['data'][]=$objeto;
         }
@@ -74,5 +74,3 @@
         $jsonstring=json_encode($json[0]);
         echo $jsonstring;
     }
-
-?>
