@@ -35,11 +35,11 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
                     <form id="form-crear">
                         <div class="form-group">
                             <label for="nombre">Nombres:</label>
-                            <input id="nombre" type="text" class="form-control" placeholder="Ingrese nombre" require="">
+                            <input id="nombre" type="text" class="form-control letters" placeholder="Ingrese nombre" require="">
                         </div>
                         <div class="form-group">
                             <label for="telefono">Telefono:</label>
-                            <input id="telefono" type="text" class="form-control" placeholder="Ingrese telefono" require="">
+                            <input id="telefono" type="text" class="form-control numbers" placeholder="Ingrese telefono" require="">
                         </div>
                         <div class="form-group">
                             <label for="correo">Correo:</label>
@@ -90,9 +90,9 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
             <form id="form-logo" enctype="multipart/form-data">
                 <div class="input-group mb-3 ml-5 mt-2">
                     <input type="file"  class="input-group" name="foto">
-                    <input type="text" name="funcion" id="funcion">
-                    <input type="text" name="id_logo_prov" id="id_logo_prov">
-                    <input type="text" name="avatar" id="avatar">
+                    <input type="hidden" name="funcion" id="funcion">
+                    <input type="hidden" name="id_logo_prov" id="id_logo_prov">
+                    <input type="hidden" name="avatar" id="avatar">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
@@ -157,4 +157,4 @@ include_once 'layout/footer.php';
     header('Location:../index.php');
 }
 ?>
-<script src="../js/gestion_proveedor.js"></script>
+<script src="../js/gestion_proveedor.js" type="module"></script>

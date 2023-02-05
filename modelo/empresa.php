@@ -9,7 +9,7 @@ class Empresa
         $db = new conexion();
         $this->acceso = $db->pdo;
     }
-    function crear($nombre, $logo, $ruc, $telefono, $direccion, $email)
+    public function crear(string $nombre, string $logo, string $ruc, string $telefono, string $direccion, string $email)
     {
         $sql = "SELECT nombre FROM empresa  WHERE nombre=:nombre";
         $query = $this->acceso->prepare($sql);
@@ -20,36 +20,44 @@ class Empresa
         } else {
             $sql = "INSERT INTO empresa(nombre,logo,ruc,telefono,direccion,email) VALUES(:nombre,:logo,:ruc,:telefono,:direccion,:email)";
             $query = $this->acceso->prepare($sql);
-            $query->execute([':nombre' => $nombre, ':logo' => $logo, ':ruc' => $ruc, ':telefono' => $telefono, ':direccion' => $direccion, ':email' => $email]);
+            $query->execute([
+                ':nombre' => $nombre,
+                ':logo' => $logo,
+                ':ruc' => $ruc,
+                ':telefono' => $telefono,
+                ':direccion' => $direccion,
+                ':email' => $email
+            ]);
             echo 'crear';
         }
     }
-    function cambiar_logo($id, $nombre_foto)
+    public function cambiar_logo(int $id, string $nombre_foto)
     {
         $sql = "SELECT avatar FROM laboratorio WHERE id_laboratorio=:Id";
         $query = $this->acceso->prepare($sql);
-        $query->execute(array(':Id' => $id));
+        $query->execute([':Id' => $id]);
         $this->objetos = $query->fetchall();
 
         $sql = "UPDATE laboratorio SET avatar=:nombre_foto WHERE Id_laboratorio=:Id";
         $query = $this->acceso->prepare($sql);
-        $query->execute(array(':Id' => $id, ':nombre_foto' => $nombre_foto));
+        $query->execute([':Id' => $id, ':nombre_foto' => $nombre_foto]);
 
         return $this->objetos;
     }
-    function editar($nombre, $id_editado)
+    public function editar(string $nombre, int $id_editado)
     {
         $sql = "UPDATE laboratorio SET nombre=:nombre WHERE id_laboratorio=:Id";
         $query = $this->acceso->prepare($sql);
-        $query->execute(array(':Id' => $id_editado, ':nombre' => $nombre));
+        $query->execute([':Id' => $id_editado, ':nombre' => $nombre]);
         $this->objetos = $query->rowcount();
         echo 'editado';
     }
-    function search(){
-        $sql="SELECT * FROM empresa  WHERE nombre NOT LIKE ''ORDER BY id LIMIT 15";
-        $query=$this->acceso->prepare($sql);
+    public function search()
+    {
+        $sql = "SELECT * FROM empresa  WHERE nombre NOT LIKE ''ORDER BY id LIMIT 15";
+        $query = $this->acceso->prepare($sql);
         $query->execute();
-        $this->objetos=$query->fetchall();
+        $this->objetos = $query->fetchall();
         return $this->objetos;
     }
 }

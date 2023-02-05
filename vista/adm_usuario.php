@@ -3,9 +3,9 @@ session_start();
 if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
     include_once 'layout/header.php';
 ?>
-  <title>Proyect| Gestión Usuarios</title>
+  <title>Pharmacy System|Gestión Usuarios</title>
 
-    <?php 
+    <?php
         include_once 'layout/nav.php';
     ?>
 <!---Modal para crear usuario-->
@@ -31,11 +31,11 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
                     <form id="form-crear">
                         <div class="form-group">
                             <label for="nombre">Nombres:</label>
-                            <input id="nombre" type="text" class="form-control" placeholder="Ingrese nombre" require="">
+                            <input id="nombre" type="text" class="form-control letters" placeholder="Ingrese nombre" require="">
                         </div>
                         <div class="form-group">
                             <label for="apellido">Apellidos:</label>
-                            <input id="apellido" type="text" class="form-control" placeholder="Ingrese apellido" require="">
+                            <input id="apellido" type="text" class="form-control letters" placeholder="Ingrese apellido" require="">
                         </div>
                         <div class="form-group">
                             <label for="nacimiento">Fecha Nacimiento:</label>
@@ -43,13 +43,13 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
                         </div>
                         <div class="form-group">
                             <label for="cedula">Cedula:</label>
-                            <input id="cedula" type="text" class="form-control" placeholder="Ingrese cedula" require="">
+                            <input id="cedula" type="text" class="form-control numbers" placeholder="Ingrese cedula" require="">
                         </div>
                         <div class="form-group">
                             <label for="clave">Contraseña:</label>
                             <input id="clave" type="password" class="form-control" placeholder="Ingrese la contraseña" require="">
                         </div>
-                    
+
                 </div>
                 <div class="card-footer">
                     <button class="btn bg-gradient-primary float-rigth m-1" type="submit">Guardar</button>
@@ -107,7 +107,6 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
     </div>
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -122,10 +121,8 @@ if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==3){
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
-    <!-- Main content -->
     <section>
         <div class="container-fluid">
             <div class="card card-success">
@@ -158,4 +155,4 @@ include_once 'layout/footer.php';
     header('Location:../index.php');
 }
 ?>
-<script src="../js/gestion_usuario.js"></script>
+<script src="../js/gestion_usuario.js" type="module"></script>

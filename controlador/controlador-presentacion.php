@@ -2,7 +2,7 @@
     include_once '../modelo/presentacion.php';
 
     $presentacion=new presentacion();
-    
+
     if($_POST['funcion']=='crear'){
         $nombre=$_POST['nombre_presentacion'];
         $presentacion->crear($nombre);
@@ -25,7 +25,7 @@
         $presentacion->editar($nombre,$id_editado);
     }
     if($_POST['funcion']=='borrar'){
-        $id=$_POST['id'];            
+        $id=$_POST['id'];
         $presentacion->borrar($id);
     }
     if($_POST['funcion']=='rellenar_presentaciones'){
@@ -40,4 +40,3 @@
         $jsonsting=json_encode($json);
         echo $jsonsting;
     }
-?>
