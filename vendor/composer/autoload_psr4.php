@@ -23,5 +23,6 @@ return array(
     'Matrix\\' => array($vendorDir . '/markbaker/matrix/classes/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
+    'Composer\\Pcre\\' => array($vendorDir . '/composer/pcre/src'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
 );
