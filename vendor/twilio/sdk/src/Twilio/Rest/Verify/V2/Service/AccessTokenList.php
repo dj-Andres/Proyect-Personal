@@ -15,15 +15,12 @@ use Twilio\Options;
 use Twilio\Values;
 use Twilio\Version;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class AccessTokenList extends ListResource {
     /**
      * Construct the AccessTokenList
      *
      * @param Version $version Version that contains the resource
-     * @param string $serviceSid The unique string that identifies the resource
+     * @param string $serviceSid Verify Service Sid.
      */
     public function __construct(Version $version, string $serviceSid) {
         parent::__construct($version);
@@ -50,11 +47,21 @@ class AccessTokenList extends ListResource {
             'Identity' => $identity,
             'FactorType' => $factorType,
             'FactorFriendlyName' => $options['factorFriendlyName'],
+            'Ttl' => $options['ttl'],
         ]);
 
         $payload = $this->version->create('POST', $this->uri, [], $data);
 
         return new AccessTokenInstance($this->version, $payload, $this->solution['serviceSid']);
+    }
+
+    /**
+     * Constructs a AccessTokenContext
+     *
+     * @param string $sid A string that uniquely identifies this Access Token.
+     */
+    public function getContext(string $sid): AccessTokenContext {
+        return new AccessTokenContext($this->version, $this->solution['serviceSid'], $sid);
     }
 
     /**
