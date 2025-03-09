@@ -209,6 +209,10 @@ $(document).ready(function(){
     });
     $('#form-logo').submit(e=>{
         let formData=new FormData($('#form-logo')[0]);
+
+        console.log(formData);
+        
+
         $.ajax({
             url:'../controlador/controlador-producto.php',
             type:'POST',
@@ -217,7 +221,9 @@ $(document).ready(function(){
             processData:false,
             comentType:false
         }).done(function(response){
+            console.log(response);
             const json=JSON.parse(response);
+            
             if (json.alert=='editado') {
                 $('#logo-actual').attr('src',json.ruta);
                 $('#update').hide('slow');

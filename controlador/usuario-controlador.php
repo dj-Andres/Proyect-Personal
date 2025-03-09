@@ -10,14 +10,13 @@
         $json=array();
         date_default_timezone_set('America/Guayaquil');
         $fecha_actual=new DateTime();
-        $usuario->obtener_datos($_POST['dato']);
+        $user = $usuario->obtener_datos($_POST['dato']);
+
         foreach($usuario->objetos as $objeto){
             $naciiento=new DateTime($objeto->edad);
-            //comparacion de la fecha actual con la fecha de nacimiento//
             $edad=$naciiento->diff($fecha_actual);
             $edad_año=$edad->y;
-            $json[]=array(
-                //el ultimo nombre es la columna de la tabla usuario//
+            $json[]=[
                     'nombre'=>$objeto->nombre,
                     'apellido'=>$objeto->apellido,
                     'edad'=>$edad_año,
@@ -29,7 +28,7 @@
                     'sexo'=>$objeto->sexo,
                     'adicional'=>$objeto->adicional,
                     'avatar'=>'../img/'.$objeto->avatar
-            );
+            ];
         }
             $jsonstring=json_encode($json[0]);
             echo $jsonstring;
@@ -74,12 +73,12 @@
         $usuario->actualizar_clave($Id_usuario,$vieja_clave,$nueva_clave);
 
     }
-    if($_POST['funcion']=='cambiar_foto'){
+    if((isset($_POST['funcion'])) && ($_POST['funcion']=='cambiar_foto')){
         if(($_FILES['foto']['type']=='image/jpeg') || ($_FILES['foto']['type']=='image/png') || ($_FILES['foto']['type']=='image/gif')){
             $nombre_foto=uniqid().'-'.$_FILES['foto']['name'];
-            //echo $nombre_foto;
             $ruta='../img/'.$nombre_foto;
             move_uploaded_file($_FILES['foto']['tmp_name'],$ruta);
+            
             $usuario->cambiar_foto($Id_usuario,$nombre_foto);
             foreach($usuario->objetos as $objeto){
                 unlink('../img/'.$objeto->avatar);

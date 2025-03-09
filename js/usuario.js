@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var funcion='';
     var Id_usuario=$('#Id_usuario').val();
-    console.log(Id_usuario);
+
     var edit=false;
     buscar_usuario(Id_usuario);
     function buscar_usuario(dato){
@@ -21,6 +21,7 @@ $(document).ready(function(){
             let tipo_usuario='';
             //JSON.parse convierte  el json encode del controlador y convierte a int al string del controlador//
             const usuario=JSON.parse(response);
+            
             // recorremos el json//
             nombre+=`${usuario.nombre}`;
             apellido+=`${usuario.apellido}`;
