@@ -1,7 +1,14 @@
-# Pharmacy System
+# FarmaControl
 Es un proyecto de gestión de usuarios, inventarios y ventas realizadas con patrón MVC en php, my sql, css, html,
 Elaborado con la plantilla AdminLT
 
+
+### usuario de pruebas : <b>123456789</b>
+### clave de pruebas   : <b>123456</b>
+
+## Nota
+ #### La información solo está durante un mes siempre, luego de ese tiempo se vaciaria la información que se haya guardado como datos de prubeas
+#### Es un ambiente de pruebas
 
 ## Modulo de Usuarios
 En este modulo se crea,edita y elimina a los usuarios en mismo que el usuario más alto es root el cual podra ascender o descender a los demás usuarios
