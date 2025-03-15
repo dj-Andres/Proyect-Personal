@@ -36,9 +36,9 @@ if (!empty($_SESSION['us_tipo'])) {
                         <div class="from-group mx-sm-4 pb-2">
                             <input type="submit" value="Ingresar" class="btn btn-block ingresar">
                         </div>
-                        <div class="form-group mx-sm-4 text-right">
+                        <!-- <div class="form-group mx-sm-4 text-right">
                             <span><a href="vista/recuperar_clave.php" class="olvide">Olvide mi contraseña</a></span>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>

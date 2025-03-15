@@ -17,7 +17,7 @@ class usuario
     $this->objetos = $query->fetchall();
     return $this->objetos;
   }
-  public function obtener_datos(int $id)
+  public function obtener_datos(string $id)
   {
     $sql = "SELECT * FROM usuario  join tipo_us on us_tipo=Id_tipo_us  AND cedula=:id";
     $query = $this->acceso->prepare($sql);
@@ -25,7 +25,7 @@ class usuario
     $this->objetos = $query->fetchall();
     return $this->objetos;
   }
-  public function actualizar_usuario(int $Id_usuario, string $telefono, string $resedencia, string $correo, string $sexo, string $adiconal)
+  public function actualizar_usuario(string $Id_usuario, string $telefono, string $resedencia, string $correo, string $sexo, string $adiconal)
   {
     $sql = "UPDATE usuario SET telefono=:telefono,residencia=:residencia,correo=:correo,sexo=:sexo,adicional=:adicional WHERE cedula=:Id_usuario";
     $query = $this->acceso->prepare($sql);
@@ -38,7 +38,7 @@ class usuario
       ':adicional' => $adiconal
     ]);
   }
-  public function actualizar_clave(int $Id_usuario, string $vieja_clave, string $nueva_clave)
+  public function actualizar_clave(string $Id_usuario, string $vieja_clave, string $nueva_clave)
   {
     $sql = "SELECT * FROM usuario WHERE cedula=:Id_usuario AND clave=:vieja_clave";
     $query = $this->acceso->prepare($sql);
@@ -54,7 +54,7 @@ class usuario
       echo 'no-update';
     }
   }
-  public function cambiar_foto(int $Id_usuario, string $nombre_foto)
+  public function cambiar_foto(string $Id_usuario, string $nombre_foto)
   {
     $sql = "SELECT avatar FROM usuario WHERE cedula=:Id_usuario";
     $query = $this->acceso->prepare($sql);
