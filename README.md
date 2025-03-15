@@ -3,6 +3,8 @@ Es un proyecto de gestión de usuarios, inventarios y ventas realizadas con patr
 Elaborado con la plantilla AdminLT
 
 
+## URL de pruebas https://farmacontrol.kreativesofts.com
+
 ### usuario de pruebas : <b>123456789</b>
 ### clave de pruebas   : <b>123456</b>
 
